@@ -27,7 +27,7 @@ if (!config.STRING) {
   fs.appendFile('config.js', '\nexports.STRING = ' + "'" + ab + "'" + ';');
 }
 
-app.use('/public', express.static(__dirname + '/public'));
+app.use('/', express.static(__dirname + '/public'));
 app.enable('trust proxy');
 app.locals.pretty = true;
 app.set('view engine', 'jade');
