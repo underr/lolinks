@@ -4,20 +4,29 @@ var sqlite3 = require('sqlite3').verbose();
 var bodyParser = require('body-parser')
 var db = new sqlite3.Database('links.db');
 var chalk = require('chalk');
-var moment = require("moment");
+var moment = require('moment');
+var config = require('./config');
+var fs = require('fs');
 
 /* TODO:
 [x] paginação
-[ ] evitar repetições
+[x] evitar repetições
 [ ] autenticação (com cookies e STRING?)
 [ ] inputs mais responsivos
 */
 
+if (!config.STRING) {
+  a = Math.random().toString(36).slice(2);
+  b = Math.random().toString(36).slice(2);
+  ab = a + b;
+  console.log(chalk.bgRed('Gerando string.'));
+  fs.appendFile('config.js', '\nexports.STRING = ' + "'" + ab + "'" + ';');
+}
+
 var totalItens;
 var VALIDURL = /^(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
 // CONFIG
-ITENS_PER_PAGE = 10
-SERVER_PORT = 5000;
+
 
 app.use('/public', express.static(__dirname + '/public'));
 app.enable('trust proxy');
@@ -51,12 +60,12 @@ app.get('/:page', function(req, res) {
   });
   function range1(i){return i?range1(i-1).concat(i):[]}   
   currentPage = req.params.page;
-  startIndex = (currentPage - 1) * ITENS_PER_PAGE;
-  totalPages = Math.ceil(totalItens / ITENS_PER_PAGE);
+  startIndex = (currentPage - 1) * config.ITENS_PER_PAGE;
+  totalPages = Math.ceil(totalItens / config.ITENS_PER_PAGE);
   tp = range1(totalPages);
   n = currentPage - 1;
   tp[n] = '♥';
-  query = 'SELECT * FROM bookmarks ORDER BY rowid DESC LIMIT ' + startIndex + ', ' + ITENS_PER_PAGE;
+  query = 'SELECT * FROM bookmarks ORDER BY rowid DESC LIMIT ' + startIndex + ', ' + config.ITENS_PER_PAGE;
   db.all(query, function(err, row) {
     if (err !== null) {
       res.render('erro', { erro: 'Oops! Algo de errado aconteceu!' });
@@ -103,15 +112,30 @@ app.post('/add', function(req, res) {
   }
 });
 
-app.get('/delete/:id', function(req, res) {
-  db.run("DELETE FROM bookmarks WHERE id='" + req.params.id + "'", function(err) {
-    if (err !== null) {
-            res.render('erro', { erro: 'Oops! Algo de errado aconteceu!' });
-    } else {
-      res.redirect('/');
-    }
+app.get('/delete/:string/:id', function(req, res) {
+  str = req.params.string;
+  id = req.params.id;
+  if (str === config.STRING) {
+    db.run("DELETE FROM bookmarks WHERE id='" + id + "'", function(err) {
+      if (err !== null) {
+              res.render('erro', { erro: 'Oops! Algo de errado aconteceu!' });
+      } else {
+        var request = { deleted: id };
+        res.send(JSON.stringify(request));
+      }
+    });
+  } else {
+     res.render('erro', { erro: 'Você não está autenticado.' });
+  }
+});
+
+app.use(function(req, res, next){
+  res.render('404', {
+    url: req.url,
+    title: '404'
   });
 });
 
-app.listen(SERVER_PORT);
-console.log(chalk.bgRed("Servidor disponível no endereço http://localhost:" + SERVER_PORT));
+
+app.listen(config.SERVER_PORT);
+console.log(chalk.green("Servidor disponível no endereço http://localhost:" + config.SERVER_PORT));

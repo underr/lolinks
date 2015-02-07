@@ -16,6 +16,7 @@
     "sqlite3": "^3.0.4"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "postinstall": "cp config.js.example config.js"
   }
 }
