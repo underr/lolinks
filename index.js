@@ -34,7 +34,7 @@ app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 app.use(bodyParser.urlencoded({ extended: true }))
 
-db.get("SELECT DISTINCT name FROM sqlite_master WHERE type='table' AND name='bookmarks'", function(err, row) {
+db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='bookmarks'", function(err, row) {
   if(err !== null) {
     console.log(err);
   } else if (row == null) {
