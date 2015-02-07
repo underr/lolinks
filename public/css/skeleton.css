@@ -409,6 +409,9 @@ there.
 #pager {
   text-align: center;}
 
+#dcr {
+  color: #4E4E4E; }
+
 #pager a {
   display: inline-block;
   background-color: #E54E76;
@@ -427,3 +430,6 @@ there.
   letter-spacing: .1rem;
   white-space: nowrap;
   }
+
+label {
+  display: none }

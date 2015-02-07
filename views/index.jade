@@ -6,16 +6,20 @@ body
    h3 ♥ lolinks ♥
 
     form(action="add", method="post")
+     label Título
      input(type="text", name="title", placeholder="Título", size="20", autofocus="autofocus")
+     label URL
      input(type="text", name="url", placeholder="URL", size="34")
      br
-     input(type="text", name="dcr", placeholder="Descrição (70 caracteres)", size="60", heigth="5")
+     label Descrição (max 70 caracteres)
+     input(type="text", name="dcr", placeholder="Descrição (max 70 caracteres)", size="60", heigth="5")
      br
-     input(type="submit", value="♥ ~Enviar~ ♥")
+     input(type="submit", value="Enviar~")
   .container.one-half.column 
    - for(bookmark in bookmarks) {
-    a(href=bookmarks[bookmark].url)= bookmarks[bookmark].title
-    p #{bookmarks[bookmark].dcr}
+    a(href=bookmarks[bookmark].url, title=bookmarks[bookmark].id)= bookmarks[bookmark].title
+    |  · #{bookmarks[bookmark].date}
+    p#dcr #{bookmarks[bookmark].dcr}
    - }
 
   br
