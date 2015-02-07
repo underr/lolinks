@@ -7,26 +7,25 @@ var chalk = require('chalk');
 var moment = require('moment');
 var config = require('./config');
 var fs = require('fs');
+var i18n = require('./i18n/' + config.LANGUAGE);
 
 /* TODO:
 [x] paginação
-[x] evitar repetições
+[ ] evitar repetições
 [ ] autenticação (com cookies e STRING?)
 [ ] inputs mais responsivos
 */
+
+var totalItens;
+var VALIDURL = /^(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
 
 if (!config.STRING) {
   a = Math.random().toString(36).slice(2);
   b = Math.random().toString(36).slice(2);
   ab = a + b;
-  console.log(chalk.bgRed('Gerando string.'));
+  console.log(chalk.bgRed(i18n.genString));
   fs.appendFile('config.js', '\nexports.STRING = ' + "'" + ab + "'" + ';');
 }
-
-var totalItens;
-var VALIDURL = /^(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
-// CONFIG
-
 
 app.use('/public', express.static(__dirname + '/public'));
 app.enable('trust proxy');
@@ -44,7 +43,7 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='bookmarks'",
       if (err !== null) {
         console.log(err);
       } else {
-        console.log(chalk.bgRed("Banco de Dados criado com sucesso."));
+        console.log(chalk.bgRed(i18n.dbCrt));
       }
     });
   }
@@ -68,14 +67,16 @@ app.get('/:page', function(req, res) {
   query = 'SELECT * FROM bookmarks ORDER BY rowid DESC LIMIT ' + startIndex + ', ' + config.ITENS_PER_PAGE;
   db.all(query, function(err, row) {
     if (err !== null) {
-      res.render('erro', { erro: 'Oops! Algo de errado aconteceu!' });
+      res.render('erro', { erro: i18n.ops });
       console.log(row)
     } else {
       res.render('index', {
         bookmarks: row,
         tpages: tp, 
         cp: currentPage, 
-        title: 'lolinks' 
+        title: 'lolinks',
+        inptitle: i18n.title,
+        inpdescr: i18n.descr
       });
     }
   });
@@ -85,27 +86,27 @@ app.post('/add', function(req, res) {
   title = req.body.title;
   url = req.body.url;
   dcr = req.body.dcr;
-  moment.locale('pt-BR');    
+  moment.locale(config.LANGUAGE);    
   now = moment(new Date());
   date = now.format("DD MMM YYYY - HH:mm");
 
   if (!title || !url || !dcr) {
-    res.render('erro', { erro: 'Preencha todos os campos!' });
+    res.render('erro', { erro: i18n.allCamp });
   } else if (!url.match(VALIDURL)) {
-    res.render('erro', { erro: 'Não é uma URL válida!'});
+    res.render('erro', { erro: i18n.valURL });
   } else if (toString(dcr) > 70) {
-    res.render('erro', { erro: 'Use menos de 70 caracteres na descrição, por favor.'});
+    res.render('erro', { erro: i18n.dcrLong });
   } else if (toString(title) > 25) {
-    res.render('erro', { erro: 'Título muito longo.'});
+    res.render('erro', { erro: i18n.titleLong });
   } else {
     query = "INSERT INTO 'bookmarks' (dcr, date, title, url) VALUES('" + 
             dcr + "', '" + date + "', '" + title + "', '" + url + "')"
 
     db.run(query, function(err) {
       if (err !== null) {
-        res.render('erro', { erro: 'Oops! Algo de errado aconteceu!' });
+        res.render('erro', { erro: i18n.ops });
       } else {
-        console.log(chalk.blue(url + ' adicionada como ' + '"' + title + '"'));
+        console.log(chalk.blue(url + i18n.added + '"' + title + '"'));
         res.redirect('back');
       }
     });
@@ -118,14 +119,14 @@ app.get('/delete/:string/:id', function(req, res) {
   if (str === config.STRING) {
     db.run("DELETE FROM bookmarks WHERE id='" + id + "'", function(err) {
       if (err !== null) {
-              res.render('erro', { erro: 'Oops! Algo de errado aconteceu!' });
+              res.render('erro', { erro: i18n.ops });
       } else {
         var request = { deleted: id };
         res.send(JSON.stringify(request));
       }
     });
   } else {
-     res.render('erro', { erro: 'Você não está autenticado.' });
+     res.render('erro', { erro: i18n.notAuth });
   }
 });
 
@@ -138,4 +139,4 @@ app.use(function(req, res, next){
 
 
 app.listen(config.SERVER_PORT);
-console.log(chalk.green("Servidor disponível no endereço http://localhost:" + config.SERVER_PORT));
+console.log(chalk.green(i18n.srvDisp + config.SERVER_PORT));

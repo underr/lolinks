@@ -1,2 +1,3 @@
 exports.ITENS_PER_PAGE = 10;
 exports.SERVER_PORT = 5000;
+exports.LANGUAGE = 'pt-BR';
