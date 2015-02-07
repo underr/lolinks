@@ -24,6 +24,7 @@ body
 
   br
   #pager
-     each val in tpages
-      a(href= val, class='pag')
-        = val
+     if tpages.length > 2
+      each val in tpages
+       a(href= val, class='pag')
+         = val
