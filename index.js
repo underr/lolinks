@@ -12,7 +12,7 @@ var i18n = require('./i18n/' + config.LANGUAGE);
 /* TODO:
 [x] paginação
 [ ] evitar repetições
-[ ] autenticação (com cookies e STRING?)
+[x] autenticação (com cookies e STRING?)
 [ ] inputs mais responsivos
 */
 
