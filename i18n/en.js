@@ -10,5 +10,6 @@ module.exports = {
 	added: ' added as ',
 	notAuth: 'You are not authenticated.',
 	title: 'Title',
-	descr: 'Description (max 70 characters)'
+	descr: 'Description (max 70 characters)',
+	send: 'submit~'
 };

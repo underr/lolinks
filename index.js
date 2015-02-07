@@ -76,7 +76,8 @@ app.get('/:page', function(req, res) {
         cp: currentPage, 
         title: 'lolinks',
         inptitle: i18n.title,
-        inpdescr: i18n.descr
+        inpdescr: i18n.descr,
+        send: i18n.send
       });
     }
   });

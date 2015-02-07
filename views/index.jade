@@ -14,7 +14,7 @@ body
      label Descrição (max 70 caracteres)
      input(type="text", name="dcr", placeholder=inpdescr, size="60", heigth="5")
      br
-     input(type="submit", value="Enviar~")
+     input(type="submit", value=send)
   .container.one-half.column 
    - for(bookmark in bookmarks) {
     a(href=bookmarks[bookmark].url, title=bookmarks[bookmark].id)= bookmarks[bookmark].title
