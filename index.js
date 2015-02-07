@@ -28,7 +28,7 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='bookmarks'",
     }
     else if(row == null) {
         db.run('CREATE TABLE "bookmarks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT,' + 
-            '"dcr" VARCHAR(70), "title" VARCHAR(255), url VARCHAR(255))', function(err) {
+            '"dcr" VARCHAR(70), "title" VARCHAR(25), url VARCHAR(255))', function(err) {
             if(err !== null) {
                 console.log(err);
             }
@@ -52,13 +52,15 @@ app.get('/:page', function(req, res) {
     items_per_page = 5
     start_index = (current_page - 1) * items_per_page;
     total_pages = Math.ceil(total_itens / items_per_page);
-    tp = range1(total_pages)
+    tp = range1(total_pages);
+    n = current_page - 1;
+    tp[n] = '♥' ;
     query = 'SELECT * FROM bookmarks ORDER BY rowid DESC LIMIT ' + start_index + ', ' + items_per_page;
     db.all(query, function(err, row) {
         if (err !== null) {
             res.render('erro', { erro: 'Oops! Algo de errado aconteceu!' });
         } else {
-            res.render('index', {bookmarks: row, tpages: tp, title: 'lolinks' });
+            res.render('index', {bookmarks: row, tpages: tp, cp: current_page, title: 'lolinks' });
         }
     });
 });
@@ -74,6 +76,8 @@ app.post('/add', function(req, res) {
         res.render('erro', { erro: 'Não é uma URL válida!'});
     } else if (dcr > 70) {
         res.render('erro', { erro: 'Use menos de 70 caracteres na descrição, por favor.'});
+    } else if (title > 25) {
+        res.render('erro', { erro: 'Título muito longo.'});
     } else {
         sqlRequest = "INSERT INTO 'bookmarks' (dcr, title, url) VALUES('" + 
                      dcr + "', '" + title + "', '" + url + "')"
@@ -94,10 +98,10 @@ app.post('/add', function(req, res) {
 app.get('/delete/:id', function(req, res) {
     db.run("DELETE FROM bookmarks WHERE id='" + req.params.id + "'", function(err) {
         if(err !== null) {
-            res.send(500, "An error has occurred -- " + err);
+            res.render('erro', { erro: 'Oops! Algo de errado aconteceu!' });
         }
         else {
-            res.redirect('back');
+            res.redirect('/');
         }
     });
 });
