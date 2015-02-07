@@ -27,7 +27,7 @@ if (!config.STRING) {
   fs.appendFile('config.js', '\nexports.STRING = ' + "'" + ab + "'" + ';');
 }
 
-app.use('/public', express.static(__dirname + '/public'));
+app.use('/', express.static(__dirname + '/public'));
 app.enable('trust proxy');
 app.locals.pretty = true;
 app.set('view engine', 'jade');
@@ -63,7 +63,6 @@ app.get('/:page', function(req, res) {
   totalPages = Math.ceil(totalItens / config.ITENS_PER_PAGE);
   tp = range1(totalPages);
   n = currentPage - 1;
-  tp[n] = '♥';
   query = 'SELECT * FROM bookmarks ORDER BY rowid DESC LIMIT ' + startIndex + ', ' + config.ITENS_PER_PAGE;
   db.all(query, function(err, row) {
     if (err !== null) {
