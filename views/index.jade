@@ -5,16 +5,16 @@ body
   #add
    h3 ♥ lolinks ♥
 
-    form(action="add", method="post")
-     label Título
-     input(type="text", name="title", placeholder=inptitle, size="20", autofocus="autofocus")
-     label URL
-     input(type="text", name="url", placeholder="URL (http://)", size="34")
-     br
-     label Descrição (max 70 caracteres)
-     input(type="text", name="dcr", placeholder=inpdescr, size="60")
-     br
-     input(type="submit", value=send)
+   form(action="add", method="post")
+    label Título
+    input(type="text", name="title", placeholder=inptitle, size="20", autofocus="autofocus")
+    label URL
+    input(type="text", name="url", placeholder="URL (http://)", size="34")
+    br
+    label Descrição (max 70 caracteres)
+    input(type="text", name="dcr", placeholder=inpdescr, size="60")
+    br
+    input(type="submit", value=send)
   .container.one-half.column 
    - for(bookmark in bookmarks) {
     a(href=bookmarks[bookmark].url, target='_blank', title=bookmarks[bookmark].id)= bookmarks[bookmark].title
