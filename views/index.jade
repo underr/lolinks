@@ -20,12 +20,14 @@ body
     a(href=bookmarks[bookmark].url, target='_blank', title=bookmarks[bookmark].id)= bookmarks[bookmark].title
     |  · #{bookmarks[bookmark].date}
     p#dcr #{bookmarks[bookmark].dcr}
-    hr
    - }
 
-  br
-  #pager
-     if tpages.length > 2
-      each val in tpages
-       a(href= val, class='pag')
-         = val
+ br
+ br
+ hr
+
+ #pager
+  if tpages.length > 2
+   each val in tpages
+    a(href= val, class='pag')
+      = val
