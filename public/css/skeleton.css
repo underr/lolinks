@@ -33,8 +33,8 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .container {
   position: relative;
-  width: 80%;
-  max-width: 960px;
+  width: 85%;
+  max-width: 1024px;
   margin: 0 auto;
   padding: 0; }
 .container .column,
