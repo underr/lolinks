@@ -11,9 +11,9 @@ var i18n = require('./i18n/' + config.LANGUAGE);
 
 /* TODO:
 [x] paginação
-[ ] evitar repetições
+[x] evitar repetições
 [x] autenticação (com cookies e STRING?)
-[ ] inputs mais responsivos
+[]  inputs mais responsivos
 */
 
 var totalItens;
@@ -25,6 +25,7 @@ if (!config.STRING) {
   ab = a + b;
   console.log(chalk.bgRed(i18n.genString));
   fs.appendFile('config.js', '\nexports.STRING = ' + "'" + ab + "'" + ';');
+  console.log(chalk.red(ab));
 }
 
 app.use('/', express.static(__dirname + '/public'));
