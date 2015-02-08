@@ -91,8 +91,8 @@ app.post('/add', function(req, res) {
   url = req.body.url;
   dcr = req.body.dcr;
   moment.locale(config.LANGUAGE);    
-  now = moment(new Date());
-  date = now.format("DD MMM YYYY - HH:mm");
+  now = moment(new Date()); // difference between the server's time and visitors (set 0 to disable)
+  date = now.format("DD MMM YYYY");
 
   if (!title || !url || !dcr) {
     res.render('erro', { erro: i18n.allCamp });
