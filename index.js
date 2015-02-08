@@ -7,13 +7,14 @@ var chalk = require('chalk');
 var moment = require('moment');
 var config = require('./config');
 var fs = require('fs');
+var favicon = require('serve-favicon');
 var i18n = require('./i18n/' + config.LANGUAGE);
 
 /* TODO:
 [x] paginação
 [x] evitar repetições
 [x] autenticação (com cookies e STRING?)
-[]  inputs mais responsivos
+[ ]  inputs mais responsivos
 */
 
 var totalItens;
@@ -28,12 +29,13 @@ if (!config.STRING) {
   console.log(chalk.red(ab));
 }
 
-app.use('/', express.static(__dirname + '/public'));
 app.enable('trust proxy');
 app.locals.pretty = true;
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use('/', express.static(__dirname + '/public'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='bookmarks'", function(err, row) {
   if(err !== null) {
