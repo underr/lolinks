@@ -111,7 +111,7 @@ app.post('/add', function(req, res) {
         res.render('erro', { erro: i18n.ops });
       } else {
         console.log(chalk.blue(url + i18n.added + '"' + title + '"'));
-        res.redirect('back');
+        res.redirect('/1');
       }
     });
   }
