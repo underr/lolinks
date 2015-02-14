@@ -5,9 +5,10 @@ var bodyParser = require('body-parser')
 var db = new sqlite3.Database('links.db');
 var chalk = require('chalk');
 var moment = require('moment');
-var config = require('./config');
 var fs = require('fs');
+var _ = require('lodash');
 var favicon = require('serve-favicon');
+var config = require('./config');
 var i18n = require('./i18n/' + config.LANGUAGE);
 
 /* TODO:
@@ -89,13 +90,15 @@ app.get('/:page', function(req, res) {
 app.post('/add', function(req, res) {
   title = req.body.title;
   url = req.body.url;
-  dcr = req.body.dcr;
+  dcr = req.body.dcr || i18n.nodcr;
   moment.locale(config.LANGUAGE);    
   now = moment(new Date()); // difference between the server's time and visitors (set 0 to disable)
   date = now.format("DD MMM YYYY");
 
-  if (!title || !url || !dcr) {
+  if (!title || !url) {
     res.render('erro', { erro: i18n.allCamp });
+  } else if (_.includes(config.BLACKLIST, url)) {
+    res.render('erro', { erro: 'nope.avi' });
   } else if (!url.match(VALIDURL)) {
     res.render('erro', { erro: i18n.valURL });
   } else if (toString(dcr) > 70) {
