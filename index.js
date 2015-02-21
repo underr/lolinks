@@ -13,6 +13,7 @@ var i18n = require('./i18n/' + config.LANGUAGE);
 var totalItens;
 var VALIDURL = /^(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
 
+// STRING GENERATION
 if (!config.STRING) {
   a = Math.random().toString(36).slice(2);
   b = Math.random().toString(36).slice(2);
@@ -22,6 +23,7 @@ if (!config.STRING) {
   console.log(chalk.red(ab));
 }
 
+// MIDDLEWARE
 app.enable('trust proxy');
 app.locals.pretty = true;
 app.set('view engine', 'jade');
@@ -30,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/', express.static(__dirname + '/public'));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
+// DATABASE CREATION
 db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='bookmarks'", function(err, row) {
   if(err !== null) {
     console.log(err);
@@ -45,10 +48,11 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='bookmarks'",
   }
 });
 
-app.get('/', function(req, res) {
+app.get('/', function(req, res) { // todo: use 1 as a "natural" / route
   res.redirect('/1');
 });
 
+// PAGINATION - SPAGHETTI
 app.get('/:page', function(req, res) {
   db.each('SELECT count(rowid) AS cc FROM bookmarks', function(err, row) {
     totalItens = row.cc;
@@ -79,6 +83,7 @@ app.get('/:page', function(req, res) {
   });
 });
 
+// ADD POST
 app.post('/add', function(req, res) {
   title = req.body.title;
   url = req.body.url;
@@ -109,6 +114,7 @@ app.post('/add', function(req, res) {
   }
 });
 
+// DELETE WITH STRING
 app.get('/delete/:string/:id', function(req, res) {
   str = req.params.string;
   id = req.params.id;
@@ -126,6 +132,7 @@ app.get('/delete/:string/:id', function(req, res) {
      res.render('erro', { erro: i18n.notAuth });
   }
 });
+
 
 app.use(function(req, res, next){
   res.render('404', {
