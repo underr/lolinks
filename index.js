@@ -6,17 +6,9 @@ var db = new sqlite3.Database('links.db');
 var chalk = require('chalk');
 var moment = require('moment');
 var fs = require('fs');
-var _ = require('lodash');
 var favicon = require('serve-favicon');
 var config = require('./config');
 var i18n = require('./i18n/' + config.LANGUAGE);
-
-/* TODO:
-[x] paginação
-[x] evitar repetições
-[x] autenticação (com cookies e STRING?)
-[ ]  inputs mais responsivos
-*/
 
 var totalItens;
 var VALIDURL = /^(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
@@ -97,8 +89,6 @@ app.post('/add', function(req, res) {
 
   if (!title || !url) {
     res.render('erro', { erro: i18n.allCamp });
-  } else if (_.includes(config.BLACKLIST, url)) {
-    res.render('erro', { erro: 'nope.avi' });
   } else if (!url.match(VALIDURL)) {
     res.render('erro', { erro: i18n.valURL });
   } else if (toString(dcr) > 70) {
