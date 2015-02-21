@@ -42,8 +42,8 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='bookmarks'",
   if(err !== null) {
     console.log(err);
   } else if (row == null) {
-    db.run('CREATE TABLE "bookmarks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT,' + 
-            '"dcr" VARCHAR(70), "date" VARCHAR(20), "title" VARCHAR(25), url VARCHAR(255) UNIQUE)', function(err) {
+      db.run('CREATE TABLE "bookmarks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT,' +
+        '"dcr" VARCHAR(70), "date" VARCHAR(20), "title" VARCHAR(25), url VARCHAR(255) UNIQUE)', function(err) {
       if (err !== null) {
         console.log(err);
       } else {
@@ -59,9 +59,9 @@ app.get('/', function(req, res) {
 
 app.get('/:page', function(req, res) {
   db.each('SELECT count(rowid) AS cc FROM bookmarks', function(err, row) {
-    totalItens = row.cc;            
+    totalItens = row.cc;
   });
-  function range1(i){return i?range1(i-1).concat(i):[]}   
+  function range1(i){return i?range1(i-1).concat(i):[]}
   currentPage = req.params.page;
   startIndex = (currentPage - 1) * config.ITENS_PER_PAGE;
   totalPages = Math.ceil(totalItens / config.ITENS_PER_PAGE);
@@ -76,8 +76,8 @@ app.get('/:page', function(req, res) {
     } else {
       res.render('index', {
         bookmarks: row,
-        tpages: tp, 
-        cp: currentPage, 
+        tpages: tp,
+        cp: currentPage,
         title: 'lolinks',
         inptitle: i18n.title,
         inpdescr: i18n.descr,
@@ -91,8 +91,8 @@ app.post('/add', function(req, res) {
   title = req.body.title;
   url = req.body.url;
   dcr = req.body.dcr || i18n.nodcr;
-  moment.locale(config.LANGUAGE);    
-  now = moment(new Date()); // difference between the server's time and visitors (set 0 to disable)
+  moment.locale(config.LANGUAGE);
+  now = moment(new Date());
   date = now.format("DD MMM YYYY");
 
   if (!title || !url) {
@@ -106,10 +106,9 @@ app.post('/add', function(req, res) {
   } else if (toString(title) > 25) {
     res.render('erro', { erro: i18n.titleLong });
   } else {
-    query = "INSERT INTO 'bookmarks' (dcr, date, title, url) VALUES('" + 
-            dcr + "', '" + date + "', '" + title + "', '" + url + "')"
 
-    db.run(query, function(err) {
+    db.run( "INSERT INTO bookmarks (dcr, date, title, url) VALUES(?, ?, ?, ?)", dcr, date, title, url,
+    function(err) {
       if (err !== null) {
         res.render('erro', { erro: i18n.ops });
       } else {
@@ -124,7 +123,8 @@ app.get('/delete/:string/:id', function(req, res) {
   str = req.params.string;
   id = req.params.id;
   if (str === config.STRING) {
-    db.run("DELETE FROM bookmarks WHERE id='" + id + "'", function(err) {
+    db.run("DELETE FROM bookmarks  WHERE id= ? ", id,
+    function(err) {
       if (err !== null) {
               res.render('erro', { erro: i18n.ops });
       } else {
