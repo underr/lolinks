@@ -1,12 +1,15 @@
+// INIT
 var express = require('express');
 var app = express();
 var sqlite3 = require('sqlite3').verbose();
+// ADDONS
 var bodyParser = require('body-parser')
 var db = new sqlite3.Database('links.db');
 var chalk = require('chalk');
 var moment = require('moment');
 var fs = require('fs');
 var favicon = require('serve-favicon');
+// LOCAL
 var config = require('./config');
 var i18n = require('./i18n/' + config.LANGUAGE);
 
@@ -67,7 +70,7 @@ app.get('/page/:page', function(req, res) {
   query = 'SELECT * FROM bookmarks ORDER BY rowid DESC LIMIT ' + startIndex + ', ' + config.ITENS_PER_PAGE;
   db.all(query, function(err, row) {
     if (err !== null) {
-      res.render('erro', { erro: i18n.ops });
+      res.render('error', { error: i18n.ops });
       console.log(row)
     } else {
       res.render('index', {
@@ -92,20 +95,20 @@ app.post('/add', function(req, res) {
   date = now.format("DD MMM YYYY");
 
   if (!title || !url) {
-    res.render('erro', { erro: i18n.allCamp });
+    res.render('error', { error: i18n.allCamp });
   } else if (!url.match(VALIDURL)) {
-    res.render('erro', { erro: i18n.valURL });
+    res.render('error', { error: i18n.valURL });
   } else if (toString(dcr) > 70) {
-    res.render('erro', { erro: i18n.dcrLong });
+    res.render('error', { error: i18n.dcrLong });
   } else if (toString(title) > 25) {
-    res.render('erro', { erro: i18n.titleLong });
+    res.render('error', { error: i18n.titleLong });
   } else {
 
     db.run( "INSERT INTO bookmarks (dcr, date, title, url) VALUES(?, ?, ?, ?)", dcr, date, title, url,
     function(err) {
       if (err !== null) {
-        res.render('erro', {
-			erro: i18n.ops,
+        res.render('error', {
+			error: i18n.ops,
 			back: i18n.back
 		});
       } else {
@@ -124,14 +127,14 @@ app.get('/delete/:string/:id', function(req, res) {
     db.run("DELETE FROM bookmarks  WHERE id= ? ", id,
     function(err) {
       if (err !== null) {
-              res.render('erro', { erro: i18n.ops });
+              res.render('error', { error: i18n.ops });
       } else {
         var request = { deleted: id };
         res.send(JSON.stringify(request));
       }
     });
   } else {
-     res.render('erro', { erro: i18n.notAuth });
+     res.render('error', { error: i18n.notAuth });
   }
 });
 
