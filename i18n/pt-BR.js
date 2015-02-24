@@ -13,5 +13,7 @@ module.exports = {
 	descr: 'Descrição (max 70 caracteres, opcional)',
 	send: 'enviar ~',
 	nodcr: 'Sem descrição',
-	back: 'Voltar'
+	back: 'Voltar',
+	theAddress: 'endereço',
+	notFound: 'O não foi encontrado, mais sorte na próxima!'
 };

@@ -134,7 +134,9 @@ app.use(function(req, res, next){
   res.render('404', {
     url: req.url,
     title: '404',
-	back: i18n.back
+	back: i18n.back,
+	theAddress: i18n.theAddress,
+	notFound: i18n.notFound
   });
 });
 
