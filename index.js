@@ -74,8 +74,7 @@ app.get('/page/:page', function(req, res) {
         bookmarks: row,
         tpages: tp,
         cp: currentPage,
-        title: 'lolinks',
-        inptitle: i18n.title,
+        title: config.TITLE,
         inpdescr: i18n.descr,
         send: i18n.send
       });

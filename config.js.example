@@ -1,3 +1,8 @@
-exports.ITENS_PER_PAGE = 10;
-exports.SERVER_PORT = 5000;
-exports.LANGUAGE = 'pt-BR'; // 'en' or 'pt-BR'
+var config = {
+  ITENS_PER_PAGE: 10,
+  SERVER_PORT: 5000,
+  LANGUAGE: 'en', // en or pt-BR
+  TITLE: '♥ lolinks ♥'
+}
+
+module.exports = config;
