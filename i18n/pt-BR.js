@@ -15,5 +15,6 @@ module.exports = {
 	nodcr: 'Sem descrição',
 	back: 'Voltar',
 	theAddress: 'O endereço',
-	notFound: 'não foi encontrado, mais sorte na próxima!'
+	notFound: 'não foi encontrado, mais sorte na próxima!',
+	name: 'Título'
 };

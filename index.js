@@ -79,6 +79,7 @@ app.get('/page/:page', function(req, res) {
         cp: currentPage,
         title: config.TITLE,
         inpdescr: i18n.descr,
+        name: i18n.name,
         send: i18n.send
       });
     }

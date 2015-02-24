@@ -15,5 +15,6 @@ module.exports = {
 	nodcr: 'No description',
 	back: 'Return',
 	theAddress: 'The address',
-	notFound: 'was not found. Better luck next time!'
+	notFound: 'was not found. Better luck next time!',
+	name: 'Title'
 };
