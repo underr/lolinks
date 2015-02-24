@@ -26,5 +26,9 @@ body
 
  #pager
    each val in tpages
-    a(href= val, class='pag')
+    if val !== '♥'
+     a(href= val, class='pag')
+       = val
+    else
+     a
       = val

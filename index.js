@@ -49,11 +49,11 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='bookmarks'",
 });
 
 app.get('/', function(req, res) { // todo: use 1 as a "natural" / route
-  res.redirect('/1');
+  res.redirect('/page/1');
 });
 
 // PAGINATION - SPAGHETTI
-app.get('/:page', function(req, res) {
+app.get('/page/:page', function(req, res) {
   db.each('SELECT count(rowid) AS cc FROM bookmarks', function(err, row) {
     totalItens = row.cc;
   });
