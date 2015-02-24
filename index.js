@@ -41,7 +41,7 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='bookmarks'",
     console.log(err);
   } else if (row == null) {
       db.run('CREATE TABLE "bookmarks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT,' +
-        '"dcr" VARCHAR(70), "date" VARCHAR(20), "title" VARCHAR(25), url VARCHAR(255) UNIQUE)', function(err) {
+        '"dcr" VARCHAR(50), "date" VARCHAR(20), "title" VARCHAR(25), url VARCHAR(255) UNIQUE)', function(err) {
       if (err !== null) {
         console.log(err);
       } else {
