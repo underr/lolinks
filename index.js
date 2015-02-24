@@ -111,7 +111,7 @@ app.post('/add', function(req, res) {
 		});
       } else {
         console.log(chalk.blue(url + i18n.added + '"' + title + '"'));
-        res.redirect('/1');
+        res.redirect('/page/1');
       }
     });
   }
