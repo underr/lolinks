@@ -105,7 +105,10 @@ app.post('/add', function(req, res) {
     db.run( "INSERT INTO bookmarks (dcr, date, title, url) VALUES(?, ?, ?, ?)", dcr, date, title, url,
     function(err) {
       if (err !== null) {
-        res.render('erro', { erro: i18n.ops });
+        res.render('erro', {
+			erro: i18n.ops,
+			back: i18n.back
+		});
       } else {
         console.log(chalk.blue(url + i18n.added + '"' + title + '"'));
         res.redirect('/1');
@@ -137,7 +140,10 @@ app.get('/delete/:string/:id', function(req, res) {
 app.use(function(req, res, next){
   res.render('404', {
     url: req.url,
-    title: '404'
+    title: '404',
+	back: i18n.back,
+	theAddress: i18n.theAddress,
+	notFound: i18n.notFound
   });
 });
 
