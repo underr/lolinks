@@ -99,7 +99,7 @@ app.post('/add', function(req, res) {
     res.render('error', { error: i18n.allCamp, back: i18n.back });
   } else if (!url.match(VALIDURL)) {
     res.render('error', { error: i18n.valURL, back: i18n.back });
-  } else if (toString(dcr) > 70) {
+  } else if (toString(dcr) > 50) {
     res.render('error', { error: i18n.dcrLong, back: i18n.back });
   } else if (toString(title) > 25) {
     res.render('error', { error: i18n.titleLong, back: i18n.back });
