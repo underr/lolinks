@@ -70,7 +70,7 @@ app.get('/page/:page', function(req, res) {
   query = 'SELECT * FROM bookmarks ORDER BY rowid DESC LIMIT ' + startIndex + ', ' + config.ITENS_PER_PAGE;
   db.all(query, function(err, row) {
     if (err !== null) {
-      res.render('error', { error: i18n.ops });
+      res.render('error', { error: i18n.ops, back: i18n.back });
       console.log(row)
     } else {
       res.render('index', {
@@ -87,6 +87,7 @@ app.get('/page/:page', function(req, res) {
 
 // ADD POST
 app.post('/add', function(req, res) {
+
   title = req.body.title;
   url = req.body.url;
   dcr = req.body.dcr || i18n.nodcr;
@@ -95,22 +96,22 @@ app.post('/add', function(req, res) {
   date = now.format("DD MMM YYYY");
 
   if (!title || !url) {
-    res.render('error', { error: i18n.allCamp });
+    res.render('error', { error: i18n.allCamp, back: i18n.back });
   } else if (!url.match(VALIDURL)) {
-    res.render('error', { error: i18n.valURL });
+    res.render('error', { error: i18n.valURL, back: i18n.back });
   } else if (toString(dcr) > 70) {
-    res.render('error', { error: i18n.dcrLong });
+    res.render('error', { error: i18n.dcrLong, back: i18n.back });
   } else if (toString(title) > 25) {
-    res.render('error', { error: i18n.titleLong });
+    res.render('error', { error: i18n.titleLong, back: i18n.back });
   } else {
 
     db.run( "INSERT INTO bookmarks (dcr, date, title, url) VALUES(?, ?, ?, ?)", dcr, date, title, url,
     function(err) {
       if (err !== null) {
         res.render('error', {
-			error: i18n.ops,
-			back: i18n.back
-		});
+          error: i18n.ops,
+          back: i18n.back
+        });
       } else {
         console.log(chalk.blue(url + i18n.added + '"' + title + '"'));
         res.redirect('/page/1');
@@ -127,7 +128,7 @@ app.get('/delete/:string/:id', function(req, res) {
     db.run("DELETE FROM bookmarks  WHERE id= ? ", id,
     function(err) {
       if (err !== null) {
-              res.render('error', { error: i18n.ops });
+              res.render('error', { error: i18n.ops, back: i18n.back });
       } else {
         var request = { deleted: id };
         res.send(JSON.stringify(request));
