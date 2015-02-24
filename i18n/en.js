@@ -5,7 +5,7 @@ module.exports = {
 	srvDisp: 'Server available in the address http://localhost:',
 	allCamp: 'Fill out all the fields!',
 	valURL: 'Not a valid URL!',
-	dcrLong: 'Use less than 70 characters in the description, please.',
+	dcrLong: 'Use less than 50 characters in the description, please.',
 	titleLong: 'Title too long.',
 	added: ' added as ',
 	notAuth: 'You are not authenticated.',
