@@ -14,6 +14,6 @@ module.exports = {
 	send: 'enviar ~',
 	nodcr: 'Sem descrição',
 	back: 'Voltar',
-	theAddress: 'endereço',
-	notFound: 'O não foi encontrado, mais sorte na próxima!'
+	theAddress: 'O endereço',
+	notFound: 'não foi encontrado, mais sorte na próxima!'
 };
