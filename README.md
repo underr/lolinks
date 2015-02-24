@@ -6,6 +6,6 @@
 
 `npm install`
 
-`npm start`
+`cp config.js.example config.js`
 
-### Configure on `config.js`
+`npm start`
