@@ -12,5 +12,8 @@ module.exports = {
 	title: 'Title',
 	descr: 'Description (max 70 characters, optional)',
 	send: 'submit~',
-	nodcr: 'No description'
+	nodcr: 'No description',
+	back: 'Return',
+	theAddress: 'The address',
+	notFound: 'was not found. Better luck next time!'
 };
