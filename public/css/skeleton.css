@@ -220,6 +220,7 @@ input[type="text"],
 input[type="password"],
 textarea,
 select {
+  font-family: 'Roboto', sans-serif;
   border: 1px solid #fff;
   height: 30px;
   padding: 3px 5x; /* The 6px vertically centers text on FF, ignored by Webkit */
