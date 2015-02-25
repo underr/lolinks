@@ -18,6 +18,6 @@
 
 ### Being used at
 
-* [lolinks.tripchan.moe](https://ll.meguca.org/page/1)
+* [lolinks.tripchan.moe](http://lolinks.tripchan.moe/page/1)
 
 * [ll.meguca.org](https://ll.meguca.org/page/1)
