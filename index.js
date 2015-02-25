@@ -97,13 +97,14 @@ app.post('/add', function(req, res) {
   now = moment(new Date());
   date = now.format("DD MMM YYYY");
 
+  // this is not perfect, should be fixed
   if (!title || !url) {
     res.render('error', { error: i18n.allCamp, back: i18n.back });
   } else if (!url.match(VALIDURL)) {
     res.render('error', { error: i18n.valURL, back: i18n.back });
-  } else if (toString(dcr) > 50) {
+  } else if (toString(dcr).length > 50) {
     res.render('error', { error: i18n.dcrLong, back: i18n.back });
-  } else if (toString(title) > 25) {
+  } else if (toString(title).length > 25) {
     res.render('error', { error: i18n.titleLong, back: i18n.back });
   } else {
 
@@ -146,9 +147,9 @@ app.use(function(req, res, next){
   res.render('404', {
     url: req.url,
     title: '404',
-	back: i18n.back,
-	theAddress: i18n.theAddress,
-	notFound: i18n.notFound
+    back: i18n.back,
+    theAddress: i18n.theAddress,
+    notFound: i18n.notFound
   });
 });
 
