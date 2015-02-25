@@ -67,6 +67,7 @@ app.get('/page/:page', function(req, res) {
   tp = range1(totalPages);
   n = currentPage - 1;
   tp[n] = '♥';
+  title = config.TITLE || 'lolinks';
   query = 'SELECT * FROM bookmarks ORDER BY rowid DESC LIMIT ' + startIndex + ', ' + config.ITENS_PER_PAGE;
   db.all(query, function(err, row) {
     if (err !== null) {
@@ -77,7 +78,7 @@ app.get('/page/:page', function(req, res) {
         bookmarks: row,
         tpages: tp,
         cp: currentPage,
-        title: config.TITLE,
+        title: title,
         inpdescr: i18n.descr,
         name: i18n.name,
         send: i18n.send
