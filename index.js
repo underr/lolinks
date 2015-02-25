@@ -55,20 +55,22 @@ app.get('/', function(req, res) { // todo: use 1 as a "natural" / route
   res.redirect('/page/1');
 });
 
-// PAGINATION - SPAGHETTI
+// PAGES
 app.get('/page/:page', function(req, res) {
   db.each('SELECT count(rowid) AS cc FROM bookmarks', function(err, row) {
     totalItens = row.cc;
   });
-  function range1(i){return i?range1(i-1).concat(i):[]}
+  function rng(i){return i?rng(i-1).concat(i):[]}
+  // PAGINATION SPAGHETTI
   currentPage = req.params.page;
   startIndex = (currentPage - 1) * config.ITENS_PER_PAGE;
   totalPages = Math.ceil(totalItens / config.ITENS_PER_PAGE);
-  tp = range1(totalPages);
+  tp = rng(totalPages);
   n = currentPage - 1;
   tp[n] = '♥';
   title = config.TITLE || 'lolinks';
   query = 'SELECT * FROM bookmarks ORDER BY rowid DESC LIMIT ' + startIndex + ', ' + config.ITENS_PER_PAGE;
+
   db.all(query, function(err, row) {
     if (err !== null) {
       res.render('error', { error: i18n.ops, back: i18n.back });
