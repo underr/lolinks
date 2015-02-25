@@ -2,6 +2,7 @@
   "name": "lolinks",
   "version": "1.2.0",
   "description": "Um coletor de links kawaii",
+  "license": "WTFPL",
   "repository": {
     "type": "git",
     "url": "https://github.com/underr/lolinks.git"
