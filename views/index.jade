@@ -6,12 +6,12 @@ body
    h3 #{title}
 
    form(action="/add", method="post")
-    label Título
+    label #{name}
     input(type="text", name="title", placeholder=name, size="20", autofocus="autofocus")
     label URL
     input(type="text", name="url", placeholder="URL (http://)", size="34")
     br
-    label Descrição (max 70 caracteres)
+    label #{inpdescr}
     textarea(name="dcr", placeholder=inpdescr, cols='50', rows='30')
     br
     input(type="submit", value=send)
