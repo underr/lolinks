@@ -12,17 +12,20 @@ body
     input(type="text", name="url", placeholder="URL (http://)", size="34")
     br
     label #{inpdescr}
-    textarea(name="dcr", placeholder=inpdescr, cols='50', rows='30')
+    textarea(name="dcr", placeholder=inpdescr, cols='45', rows='30')
     br
     input(type="submit", value=send)
-   a(href='/p/date/1' id='nodecor') #{sort[0]} · 
-   a(href='/p/alpha/1' id='nodecor') #{sort[1]}
+   if bookmarks !== null
+    a(href='/p/date/1' id='nodecor') #{sort[0]} · 
+    a(href='/p/alpha/1' id='nodecor') #{sort[1]}
   br
   .container.one-half.column 
    - for(bookmark in bookmarks) {
+   - var link = '/click/' + bookmarks[bookmark].id;
     div(id='bookmark')
-     a(href=bookmarks[bookmark].url, target='_blank', title=bookmarks[bookmark].id)= bookmarks[bookmark].title
-     |  · #{bookmarks[bookmark].date}
+     a(href=link , target='_blank', title=bookmarks[bookmark].id)= bookmarks[bookmark].title
+     |  · #{bookmarks[bookmark].date}  ·  
+     span(id='clicks') #{bookmarks[bookmark].clicks} clicks
      p#dcr #{bookmarks[bookmark].dcr}
    - }
 

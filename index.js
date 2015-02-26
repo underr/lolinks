@@ -40,8 +40,9 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='bookmarks'",
   if(err !== null) {
     console.log(err);
   } else if (row == null) {
-      db.run('CREATE TABLE "bookmarks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT,' +
-        '"dcr" VARCHAR(50), "date" VARCHAR(20), "title" VARCHAR(25), url VARCHAR(255) UNIQUE)', function(err) {
+      db.run('CREATE TABLE "bookmarks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT, "clicks" INTEGER DEFAULT 0,' +
+        '"dcr" VARCHAR(50), "date" VARCHAR(20), "title" VARCHAR(25), url VARCHAR(255) UNIQUE)',
+      function(err) {
       if (err !== null) {
         console.log(err);
       } else {
@@ -135,6 +136,21 @@ app.post('/add', function(req, res) {
       }
     });
   }
+});
+
+// LINK COUNTER
+app.get('/click/:link', function(req, res) {
+  link = (req.params.link); //SELECT url FROM bookmarks WHERE id=1;
+  db.all("SELECT url as link FROM bookmarks WHERE id= ?", link,
+  function(err, row) { // callback hell
+    if (err !== null) {
+      console.log(err)
+      res.render('error', { error: i18n.ops, back: i18n.back });
+    } else {
+      db.run("UPDATE bookmarks SET clicks = clicks + 1 WHERE id = ?", link);
+      res.redirect(row[0].link)
+    }
+  });
 });
 
 // DELETE WITH STRING
