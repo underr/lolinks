@@ -265,16 +265,16 @@ hr {
 
 #pager a {
   display: inline-block;
-  background-color: #E54E76;
+  background-color: white;
   border-radius: 4px;
-  color: #fff;
+  color: #E54E76;
   margin-left: 10px;
   text-align: center;
   font-size: 11px;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  border: 1px solid #E54E76;
+  border: 1px solid white;
   height: 35px;
   line-height: 38px;
   padding: 0 15px;
@@ -300,9 +300,9 @@ label {
 -ms-animation:pop-in 0.5s; }
 
 a#heart {
-  background-color: white;
-  border: white;
-  color: #E54E76; }
+  background-color:  #E54E76;
+  border: #E54E76;
+  color: white; }
 
 /* Animations */
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
