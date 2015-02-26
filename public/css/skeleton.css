@@ -29,16 +29,6 @@
     margin-left: 4%; }
 
   .container .one-half.column {
-    opacity:0;
-    -webkit-animation:fadeIn ease-in 1;
-    -moz-animation:fadeIn ease-in 1;
-    animation:fadeIn ease-in 1;
-    -webkit-animation-fill-mode:forwards;
-    -moz-animation-fill-mode:forwards;
-    animation-fill-mode:forwards;
-    -webkit-animation-duration:0.3s;
-    -moz-animation-duration:0.3s;
-    animation-duration:0.3s;
     column-count: 2;
     column-fill: auto;
     column-gap: 3;
@@ -62,6 +52,16 @@ body {
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
   font-weight: 400;
+  opacity:0;
+  -webkit-animation:fadeIn ease-in 1;
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+  -webkit-animation-fill-mode:forwards;
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+  -webkit-animation-duration:0.3s;
+  -moz-animation-duration:0.3s;
+  animation-duration:0.3s;  
   font-family: 'Roboto', sans-serif;
   color: #222; }
 
