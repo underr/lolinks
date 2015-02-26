@@ -31,7 +31,6 @@
   .container .one-half.column      {
     column-count: 2;
     column-gap: 50px;
-    column-rule: thick inset blue;
     -webkit-column-rule: solid 2px #CCC;
     -webkit-column-count: 2;
     -webkit-column-gap: 50px;
