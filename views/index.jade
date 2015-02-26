@@ -17,7 +17,8 @@ body
     input(type="submit", value=send)
    if bookmarks !== null
     a(href='/p/date/1' id='nodecor') #{sort[0]} · 
-    a(href='/p/alpha/1' id='nodecor') #{sort[1]}
+    a(href='/p/alpha/1' id='nodecor') #{sort[1]} · 
+    a(href='/p/clicks/1' id ='nodecor') #{sort[2]}
   br
   .container.one-half.column 
    - for(bookmark in bookmarks) {
@@ -25,7 +26,7 @@ body
     div(id='bookmark')
      a(href=link , target='_blank', title=bookmarks[bookmark].id)= bookmarks[bookmark].title
      |  · #{bookmarks[bookmark].date}  ·  
-     span(id='clicks') #{bookmarks[bookmark].clicks} clicks
+     span(id='clicks') #{bookmarks[bookmark].clicks} #{clicks}
      p#dcr #{bookmarks[bookmark].dcr}
    - }
 

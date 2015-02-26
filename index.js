@@ -78,6 +78,9 @@ app.get('/p/:order/:page', function(req, res) {
     case 'alpha':
       sortOrder = ' TITLE COLLATE NOCASE ';
       break;
+    case 'clicks':
+      sortOrder = ' clicks DESC '
+      break;
   }
 
   query = 'SELECT * FROM bookmarks ORDER BY ' + sortOrder + ' LIMIT ' +
@@ -96,7 +99,8 @@ app.get('/p/:order/:page', function(req, res) {
         inpdescr: i18n.descr,
         name: i18n.name,
         send: i18n.send,
-        sort: i18n.sort
+        sort: i18n.sort,
+        clicks: i18n.clicks
       });
     }
   });
