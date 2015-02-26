@@ -138,7 +138,9 @@ app.post('/add', function(req, res) {
   }
 });
 
-// LINK COUNTER
+// CLICK COUNTER
+// If you are using a older version, run the following on your shell to add the clicks column:
+// sqlite3 links.db "ALTER TABLE bookmarks ADD COLUMN "clicks" INTEGER DEFAULT 0"
 app.get('/click/:link', function(req, res) {
   link = (req.params.link); //SELECT url FROM bookmarks WHERE id=1;
   db.all("SELECT url as link FROM bookmarks WHERE id= ?", link,
