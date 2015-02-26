@@ -131,7 +131,7 @@ app.post('/add', function(req, res) {
         });
       } else {
         console.log(chalk.blue(url + i18n.added + '"' + title + '"'));
-        res.redirect('/page/1');
+        res.redirect('/p/date/1');
       }
     });
   }
