@@ -28,7 +28,17 @@
   .container .columns {
     margin-left: 4%; }
 
-  .container .one-half.column      {
+  .container .one-half.column {
+    opacity:0;
+    -webkit-animation:fadeIn ease-in 1;
+    -moz-animation:fadeIn ease-in 1;
+    animation:fadeIn ease-in 1;
+    -webkit-animation-fill-mode:forwards;
+    -moz-animation-fill-mode:forwards;
+    animation-fill-mode:forwards;
+    -webkit-animation-duration:0.3s;
+    -moz-animation-duration:0.3s;
+    animation-duration:0.3s;
     column-count: 2;
     column-fill: auto;
     column-gap: 3;
@@ -284,3 +294,8 @@ label {
   border-radius: 4px;
   padding: 0.2em;
 }
+
+/* Animations */
+@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
