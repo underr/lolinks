@@ -20,9 +20,10 @@ body
   br
   .container.one-half.column 
    - for(bookmark in bookmarks) {
-    a(href=bookmarks[bookmark].url, target='_blank', title=bookmarks[bookmark].id)= bookmarks[bookmark].title
-    |  · #{bookmarks[bookmark].date}
-    p#dcr #{bookmarks[bookmark].dcr}
+    div(id='bookmark')
+     a(href=bookmarks[bookmark].url, target='_blank', title=bookmarks[bookmark].id)= bookmarks[bookmark].title
+     |  · #{bookmarks[bookmark].date}
+     p#dcr #{bookmarks[bookmark].dcr}
    - }
 
  hr
