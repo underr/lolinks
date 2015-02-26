@@ -30,11 +30,7 @@
 
   .container .one-half.column      {
     column-count: 2;
-    column-gap: 50px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
+    column-gap: 3;
     -webkit-column-rule: solid 2px #CCC;
     -webkit-column-count: 2;
     -webkit-column-gap: 50px;
