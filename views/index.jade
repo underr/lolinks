@@ -23,10 +23,16 @@ body
   .container.one-half.column 
    - for(bookmark in bookmarks) {
    - var link = '/click/' + bookmarks[bookmark].id;
+   - var clac = bookmarks[bookmark].clicks;
     div(id='bookmark')
      a(href=link , target='_blank', title=bookmarks[bookmark].id)= bookmarks[bookmark].title
      |  · #{bookmarks[bookmark].date}  ·  
-     span(id='clicks') #{bookmarks[bookmark].clicks} #{clicks}
+     if clac > 1
+      span(id='clicks') #{clac} #{clicks}
+     else if clac === 1
+      span(id='clicks') 1 #{click}
+     else
+      span(id='clicks') #{noclicks}
      p#dcr #{bookmarks[bookmark].dcr}
    - }
 

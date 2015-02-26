@@ -100,7 +100,9 @@ app.get('/p/:order/:page', function(req, res) {
         name: i18n.name,
         send: i18n.send,
         sort: i18n.sort,
-        clicks: i18n.clicks
+        clicks: i18n.clicks,
+        click: i18n.click,
+        noclicks: i18n.noclicks
       });
     }
   });

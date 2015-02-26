@@ -18,5 +18,7 @@ module.exports = {
 	notFound: 'was not found. Better luck next time!',
 	name: 'Title',
 	sort: ['By date', 'By alphabetical order', 'By clicks'],
-	clicks: 'clicks'
+	clicks: 'clicks',
+	click: 'click',
+	noclicks: 'no clicks'
 };

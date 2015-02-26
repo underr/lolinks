@@ -18,5 +18,7 @@ module.exports = {
 	notFound: 'não foi encontrado, mais sorte na próxima!',
 	name: 'Título',
 	sort: ['Por data', 'Por ordem alfabética', 'Por cliques'],
-	clicks: 'cliques'
+	clicks: 'cliques',
+	click: 'clique',
+	noclicks: 'nenhum clique'
 };
