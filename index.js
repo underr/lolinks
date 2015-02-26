@@ -147,8 +147,14 @@ app.get('/click/:link', function(req, res) {
       console.log(err)
       res.render('error', { error: i18n.ops, back: i18n.back });
     } else {
-      db.run("UPDATE bookmarks SET clicks = clicks + 1 WHERE id = ?", link);
-      res.redirect(row[0].link)
+      try {
+        if (!link) res.render('error');
+        db.run("UPDATE bookmarks SET clicks = clicks + 1 WHERE id = ?", link)
+        res.redirect(row[0].link)
+      } catch(err) {
+        res.render('error');
+        console.log(err)
+      }
     }
   });
 });
@@ -172,6 +178,10 @@ app.get('/delete/:string/:id', function(req, res) {
   }
 });
 
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).render('error');
+});
 
 app.use(function(req, res, next){
   res.render('404', {
