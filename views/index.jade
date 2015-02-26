@@ -15,6 +15,9 @@ body
     textarea(name="dcr", placeholder=inpdescr, cols='50', rows='30')
     br
     input(type="submit", value=send)
+   a(href='/p/date/1' id='nodecor') #{sort[0]} · 
+   a(href='/p/alpha/1' id='nodecor') #{sort[1]}
+  br
   .container.one-half.column 
    - for(bookmark in bookmarks) {
     a(href=bookmarks[bookmark].url, target='_blank', title=bookmarks[bookmark].id)= bookmarks[bookmark].title

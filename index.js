@@ -52,38 +52,50 @@ db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='bookmarks'",
 });
 
 app.get('/', function(req, res) { // todo: use 1 as a "natural" / route
-  res.redirect('/page/1');
+  res.redirect('/p/date/1'); // by date is the default order
 });
 
 // PAGES
-app.get('/page/:page', function(req, res) {
+app.get('/p/:order/:page', function(req, res) {
+  // PAGINATION SPAGHETTI
   db.each('SELECT count(rowid) AS cc FROM bookmarks', function(err, row) {
     totalItens = row.cc;
   });
   function rng(i){return i?rng(i-1).concat(i):[]}
-  // PAGINATION SPAGHETTI
-  currentPage = req.params.page;
-  startIndex = (currentPage - 1) * config.ITENS_PER_PAGE;
+  startIndex = (req.params.page - 1) * config.ITENS_PER_PAGE;
   totalPages = Math.ceil(totalItens / config.ITENS_PER_PAGE);
   tp = rng(totalPages);
-  n = currentPage - 1;
+  n = req.params.page - 1;
+  var sortOrder;
   tp[n] = '♥';
   title = config.TITLE || 'lolinks';
-  query = 'SELECT * FROM bookmarks ORDER BY rowid DESC LIMIT ' + startIndex + ', ' + config.ITENS_PER_PAGE;
+  // order
+  switch(req.params.order) {
+    case 'date':
+      sortOrder = ' rowid DESC ';
+      break;
+    case 'alpha':
+      sortOrder = ' TITLE COLLATE NOCASE ';
+      break;
+  }
+
+  query = 'SELECT * FROM bookmarks ORDER BY ' + sortOrder + ' LIMIT ' +
+          startIndex + ', ' + config.ITENS_PER_PAGE;
 
   db.all(query, function(err, row) {
     if (err !== null) {
       res.render('error', { error: i18n.ops, back: i18n.back });
-      console.log(row)
+      console.log(err);
     } else {
       res.render('index', {
         bookmarks: row,
         tpages: tp,
-        cp: currentPage,
+        cp: req.params.page,
         title: title,
         inpdescr: i18n.descr,
         name: i18n.name,
-        send: i18n.send
+        send: i18n.send,
+        sort: i18n.sort
       });
     }
   });

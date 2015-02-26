@@ -16,5 +16,7 @@ module.exports = {
 	back: 'Voltar',
 	theAddress: 'O endereço',
 	notFound: 'não foi encontrado, mais sorte na próxima!',
-	name: 'Título'
+	name: 'Título',
+	sort: ['Por data', 'Por ordem alfabética']
+
 };
