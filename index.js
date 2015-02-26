@@ -68,7 +68,7 @@ app.get('/p/:order/:page', function(req, res) {
   tp = rng(totalPages);
   n = req.params.page - 1;
   var sortOrder;
-  tp[n] = '♥';
+  tp[n] = req.params.page;
   title = config.TITLE || 'lolinks';
   // order
   switch(req.params.order) {
