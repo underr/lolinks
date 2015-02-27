@@ -64,6 +64,7 @@ p {
 a {
   color: #E54E76; }
 a:hover {
+  font-weight: 700;
   color: #EA8DA5; }
 
 
