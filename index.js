@@ -102,7 +102,8 @@ app.get('/p/:order/:page', function(req, res) {
         sort: i18n.sort,
         clicks: i18n.clicks,
         click: i18n.click,
-        noclicks: i18n.noclicks
+        noclicks: i18n.noclicks,
+        sortby: i18n.sortby
       });
     }
   });

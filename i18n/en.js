@@ -17,8 +17,9 @@ module.exports = {
 	theAddress: 'The address',
 	notFound: 'was not found. Better luck next time!',
 	name: 'Title',
-	sort: ['By date', 'By alphabetical order', 'By clicks'],
+	sort: ['by date', 'by alphabetical order', 'by clicks'],
 	clicks: 'clicks',
 	click: 'click',
-	noclicks: 'no clicks'
+	noclicks: 'no clicks',
+    sortby: 'Sort by:'
 };
