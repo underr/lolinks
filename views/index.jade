@@ -6,21 +6,21 @@ body
    h3 #{title}
 
    form(action="/add", method="post")
-    label #{name}
+    label #{i18n.name}
     input(type="text", name="title", placeholder=name, size="20", autofocus="autofocus")
     label URL
     input(type="text", name="url", placeholder="URL (http://)", size="34")
     br
-    label #{inpdescr}
-    textarea(name="dcr", placeholder=inpdescr, cols='40', rows='30')
+    label #{i18n.descr}
+    textarea(name="dcr", placeholder=i18n.descr, cols='40', rows='30')
     br
-    input(type="submit", value=send)
+    input(type="submit", value=i18n.send)
     br
     br
-    a(id='sortby') #{sortby} 
-    a(href='/p/date/1' id='nodecor') #{sort[0]} · 
-    a(href='/p/alpha/1' id='nodecor') #{sort[1]} · 
-    a(href='/p/clicks/1' id ='nodecor') #{sort[2]}
+    a(id='sortby') #{i18n.sortby} 
+    a(href='/p/date/1' id='nodecor') #{i18n.sort[0]} · 
+    a(href='/p/alpha/1' id='nodecor') #{i18n.sort[1]} · 
+    a(href='/p/clicks/1' id ='nodecor') #{i18n.sort[2]}
   br
   .container.one-half.column 
    each bookmark, index in bookmarks
@@ -36,18 +36,18 @@ body
       span(id='zelda')   #{zelda}
       span  · #{bookmark.date}  ·  
       if clac > 1
-       span(id='clicks') #{clac} #{clicks}
+       span(id='clicks') #{clac} #{i18n.clicks}
       else if clac === 1
-       span(id='clicks') 1 #{click}
+       span(id='clicks') 1 #{i18n.click}
       else
-       span(id='clicks') #{noclicks}
+       span(id='clicks') #{i18n.noclicks}
      hr
      p#dcr #{bookmark.dcr}
 
  br
  #pager
   if cp !== tpages[0]
-   a(href = parseInt(cp) - 1, class='pag') #{prev}
+   a(href = parseInt(cp) - 1, class='pag') #{i18n.prev}
   each val in tpages
    if val !== cp
     a(href= val, class='pag')
@@ -56,4 +56,4 @@ body
     a(id="heart")
      = val
   if cp !== tpages[tpages.length - 1]
-   a(href= parseInt(cp) + 1, clas='pag') #{next}
+   a(href= parseInt(cp) + 1, clas='pag') #{i18n.next}

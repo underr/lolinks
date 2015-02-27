@@ -85,7 +85,6 @@ app.get('/p/:order/:page', function(req, res) {
 
   query = 'SELECT * FROM bookmarks ORDER BY ' + sortOrder + ' LIMIT ' +
           startIndex + ', ' + config.ITENS_PER_PAGE;
-
   db.all(query, function(err, row) {
     if (err !== null) {
       res.render('error', { error: i18n.ops, back: i18n.back });
@@ -96,16 +95,7 @@ app.get('/p/:order/:page', function(req, res) {
         tpages: tp,
         cp: req.params.page,
         title: title,
-        inpdescr: i18n.descr,
-        name: i18n.name,
-        send: i18n.send,
-        sort: i18n.sort,
-        clicks: i18n.clicks,
-        click: i18n.click,
-        noclicks: i18n.noclicks,
-        sortby: i18n.sortby,
-        next: i18n.next,
-        prev: i18n.prev
+        i18n: i18n
       });
     }
   });
