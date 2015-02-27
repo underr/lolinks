@@ -46,10 +46,14 @@ body
 
  br
  #pager
-   each val in tpages
-    if val !== cp
-     a(href= val, class='pag')
-      = val
-    else
-     a(id="heart")
-      = val
+  if cp !== tpages[0]
+   a(href = parseInt(cp) - 1, class='pag') #{prev}
+  each val in tpages
+   if val !== cp
+    a(href= val, class='pag')
+     = val
+   else
+    a(id="heart")
+     = val
+  if cp !== tpages[tpages.length - 1]
+   a(href= parseInt(cp) + 1, clas='pag') #{next}
