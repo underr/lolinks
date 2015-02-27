@@ -30,7 +30,7 @@ body
     - var zelda = url.split('/')[2]
     div(id='bookmark')
      div(id='title') 
-      span ##{index} 
+      span ##{index + 1} 
       a(href=link , target='_blank', title=bookmark.id)= bookmark.title
      div(id='info')
       span(id='zelda')   #{zelda}
