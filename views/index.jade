@@ -12,10 +12,11 @@ body
     input(type="text", name="url", placeholder="URL (http://)", size="34")
     br
     label #{inpdescr}
-    textarea(name="dcr", placeholder=inpdescr, cols='45', rows='30')
+    textarea(name="dcr", placeholder=inpdescr, cols='40', rows='30')
     br
     input(type="submit", value=send)
-   if bookmarks !== null
+    br
+    br
     a(href='/p/date/1' id='nodecor') #{sort[0]} · 
     a(href='/p/alpha/1' id='nodecor') #{sort[1]} · 
     a(href='/p/clicks/1' id ='nodecor') #{sort[2]}
@@ -24,15 +25,20 @@ body
    - for(bookmark in bookmarks) {
    - var link = '/click/' + bookmarks[bookmark].id;
    - var clac = bookmarks[bookmark].clicks;
+   - var url = bookmarks[bookmark].url;
+   - var zelda = url.split('/')[2]
     div(id='bookmark')
      a(href=link , target='_blank', title=bookmarks[bookmark].id)= bookmarks[bookmark].title
-     |  · #{bookmarks[bookmark].date}  ·  
+     span  · #{bookmarks[bookmark].date}  ·  
      if clac > 1
       span(id='clicks') #{clac} #{clicks}
      else if clac === 1
       span(id='clicks') 1 #{click}
      else
-      span(id='clicks') #{noclicks}
+      span(id='clicks') #{noclicks}     
+     br
+     span(id='zelda') #{zelda}
+     hr
      p#dcr #{bookmarks[bookmark].dcr}
    - }
 
