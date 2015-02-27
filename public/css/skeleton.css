@@ -4,40 +4,25 @@
 
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.container {
-  position: relative;
-  width: 85%;
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 0; }
-.container .column,
-.container .columns {
-  float: left;
-  width: 100%;
-  box-sizing: border-box; }
-.row {
-  margin-bottom: 2rem; }
-.row .column:first-child,
-.row .columns:first-child {
-  margin-left: 0; }
 
 /* For devices larger than 550px */
 @media (min-width: 550px) {
+
+  .container {
+    position: relative;
+    width: 85%;
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0; }
+
 
   .container .column,
   .container .columns {
     margin-left: 4%; }
 
   .container .one-half.column {
-    column-count: 2;
-    column-fill: auto;
-    column-gap: 3;
-    -webkit-column-rule: solid 2px #CCC;
-    -webkit-column-count: 2;
-    -webkit-column-gap: 50px;
-    -moz-column-rule: solid 2px #CCC;
-    -moz-column-count: 2;
-    -moz-column-gap: 50px; }
+    width: 100%;
+  margin: 0 auto; }
 
   .container .offset-by-one-half.column   { margin-left: 52%; }
 
@@ -196,34 +181,14 @@ label > .label-body {
 
 /* Spacing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-button,
-.button {
-  margin-bottom: 1rem; }
-input,
-textarea,
-select,
-fieldset {
-  margin-bottom: 1.5rem; }
-pre,
-blockquote,
-form,
-dl,
-figure,
-table,
-p,
-ul,
-ol,
-form {
-  margin-bottom: 2.5rem; }
-p {
-  margin-top: 0; }
+input {
+  margin-bottom: 1em;
+}
 
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 hr {
-  margin-top: 3rem;
-  margin-bottom: 3.5rem;
-  border-width: 0;
+  margin-top: 0.3rem;
   border-top: 1px solid #E1E1E1;
 }
 
@@ -278,8 +243,7 @@ hr {
   height: 35px;
   line-height: 38px;
   padding: 0 15px;
-  letter-spacing: .1rem;
-  white-space: nowrap; }
+  letter-spacing: .1rem; }
 
 label {
   display: none; }
@@ -295,16 +259,29 @@ label {
   padding: 0.2em; }
 
 #bookmark {
+  float: left;
+  background-color: #FDFDFD;
+  max-width: 20em;
+  display: inline-block;
+  margin: 0.2em;
+  padding: 0.4em;
+  border-radius: 4px;
+  border: 2px solid #B7B7B7;
   -webkit-animation:pop-in 0.5s;
--moz-animation:pop-in 0.5s;
--ms-animation:pop-in 0.5s; }
+  -moz-animation:pop-in 0.5s;
+  -ms-animation:pop-in 0.5s; }
 
 a#heart {
   background-color:  #E54E76;
   border: #E54E76;
   color: white; }
 
-/* Animations */
+#zelda {
+  color: #A0A0A0;
+}
+
+/* Animations
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
