@@ -1,6 +1,6 @@
 /* Font
 -------------------------------------------------- */
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700|Roboto+Condensed);
 
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -251,7 +251,11 @@ label {
 #nodecor {
   text-decoration: none;
   color: white;
-  font-weight: 600; }
+  font-weight: 700; }
+
+#nodecor:hover {
+  font-weight: 500;
+}
 
 #clicks {
   background-color: #DADADA;
@@ -282,6 +286,7 @@ a#heart {
 
 #info {
   font-size: 0.8em;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 /* Animations
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
