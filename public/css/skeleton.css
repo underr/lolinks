@@ -282,10 +282,6 @@ label {
   -moz-animation:pop-in 0.5s;
   -ms-animation:pop-in 0.5s; }
 
-#bookmark:hover {
-  background-color: #ECECEC; }
-
-
 a#heart {
   background-color:  #E54E76;
   border: #E54E76;
