@@ -37,6 +37,7 @@ body {
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
   font-weight: 400;
+  background-color: #F2F2F2;
   font-family: 'Roboto', sans-serif;
   color: #222; }
 
@@ -270,13 +271,13 @@ label {
 
 #bookmark {
   float: left;
-  background-color: #FDFDFD;
+  background-color: white;
   max-width: 23em;
   display: inline-block;
   margin: 0.2em;
   padding: 0.4em;
   border-radius: 4px;
-  border: 1px solid #B7B7B7;
+  border: 1px solid #CACACA;
   -webkit-animation:pop-in 0.5s;
   -moz-animation:pop-in 0.5s;
   -ms-animation:pop-in 0.5s; }
