@@ -23,16 +23,18 @@ body
     a(href='/p/clicks/1' id ='nodecor') #{sort[2]}
   br
   .container.one-half.column 
-   - for(bookmark in bookmarks) {
-   - var link = '/click/' + bookmarks[bookmark].id;
-   - var clac = bookmarks[bookmark].clicks;
-   - var url = bookmarks[bookmark].url;
-   - var zelda = url.split('/')[2]
+   each bookmark, index in bookmarks
+    - var link = '/click/' + bookmark.id;
+    - var clac = bookmark.clicks;
+    - var url = bookmark.url;
+    - var zelda = url.split('/')[2]
     div(id='bookmark')
-     a(href=link , target='_blank', title=bookmarks[bookmark].id)= bookmarks[bookmark].title
+     div(id='title') 
+      span ##{index} 
+      a(href=link , target='_blank', title=bookmark.id)= bookmark.title
      div(id='info')
       span(id='zelda')   #{zelda}
-      span  · #{bookmarks[bookmark].date}  ·  
+      span  · #{bookmark.date}  ·  
       if clac > 1
        span(id='clicks') #{clac} #{clicks}
       else if clac === 1
@@ -40,8 +42,7 @@ body
       else
        span(id='clicks') #{noclicks}
      hr
-     p#dcr #{bookmarks[bookmark].dcr}
-   - }
+     p#dcr #{bookmark.dcr}
 
  br
  #pager
