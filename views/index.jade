@@ -29,15 +29,15 @@ body
    - var zelda = url.split('/')[2]
     div(id='bookmark')
      a(href=link , target='_blank', title=bookmarks[bookmark].id)= bookmarks[bookmark].title
-     span  · #{bookmarks[bookmark].date}  ·  
-     if clac > 1
-      span(id='clicks') #{clac} #{clicks}
-     else if clac === 1
-      span(id='clicks') 1 #{click}
-     else
-      span(id='clicks') #{noclicks}     
-     br
-     span(id='zelda') #{zelda}
+     div(id='info')
+      span(id='zelda')   #{zelda}
+      span  · #{bookmarks[bookmark].date}  ·  
+      if clac > 1
+       span(id='clicks') #{clac} #{clicks}
+      else if clac === 1
+       span(id='clicks') 1 #{click}
+      else
+       span(id='clicks') #{noclicks}
      hr
      p#dcr #{bookmarks[bookmark].dcr}
    - }

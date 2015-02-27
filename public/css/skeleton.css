@@ -280,6 +280,9 @@ a#heart {
   color: #A0A0A0;
 }
 
+#info {
+  font-size: 0.8em;
+}
 /* Animations
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
