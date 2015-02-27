@@ -255,6 +255,10 @@ label {
   color: white;
   font-weight: 700; }
 
+#sortby {
+  text-decoration: none;
+  color: white; }
+
 #nodecor:hover {
   font-weight: 500;
 }
