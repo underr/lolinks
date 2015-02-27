@@ -276,7 +276,7 @@ label {
   margin: 0.2em;
   padding: 0.4em;
   border-radius: 4px;
-  border: 2px solid #B7B7B7;
+  border: 1px solid #B7B7B7;
   -webkit-animation:pop-in 0.5s;
   -moz-animation:pop-in 0.5s;
   -ms-animation:pop-in 0.5s; }
