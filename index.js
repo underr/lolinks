@@ -73,13 +73,13 @@ app.get('/p/:order/:page', function(req, res) {
   // order
   switch(req.params.order) {
     case 'date':
-      sortOrder = ' rowid DESC ';
+      sortOrder = 'rowid DESC';
       break;
     case 'alpha':
-      sortOrder = ' title COLLATE NOCASE ';
+      sortOrder = 'title COLLATE NOCASE';
       break;
     case 'clicks':
-      sortOrder = ' clicks DESC '
+      sortOrder = 'clicks DESC'
       break;
   }
 
