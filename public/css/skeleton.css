@@ -37,7 +37,7 @@ body {
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
   font-weight: 400;
-  background-color: #F2F2F2;
+  background-color: #F8F8F8;
   font-family: 'Roboto', sans-serif;
   color: #222; }
 
@@ -240,7 +240,7 @@ hr {
 
 #pager a {
   display: inline-block;
-  background-color: #F2F2F2;
+  background-color: transparent;
   color: #E54E76;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.24);
   margin-left: 10px;
@@ -249,7 +249,7 @@ hr {
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  border: 1px solid #F2F2F2;
+  border: 1px solid transparent;
   height: 35px;
   line-height: 38px;
   padding: 0 15px;
@@ -286,7 +286,6 @@ label {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   margin: 0.2em;
   padding: 0.4em;
-  border: 1px solid #CACACA;
   -webkit-animation: pop-in 0.5s;
   -moz-animation: pop-in 0.5s;
   -ms-animation: pop-in 0.5s; }
