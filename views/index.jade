@@ -7,12 +7,12 @@ body
 
    form(action="/add", method="post")
     label #{i18n.name}
-    input(type="text", name="title", placeholder=i18n.name, size="20", autofocus="autofocus")
+    input(type="text", id="input", name="title", placeholder=i18n.name, size="20", autofocus="autofocus")
     label URL
-    input(type="text", name="url", placeholder="URL (http://)", size="34")
+    input(type="text", id="input", name="url", placeholder="URL (http://)", size="34")
     br
     label #{i18n.descr}
-    textarea(name="dcr", placeholder=i18n.descr, cols='40', rows='30')
+    textarea(name="dcr", id="input", placeholder=i18n.descr, cols='40', rows='30')
     br
     input(type="submit", value=i18n.send)
     br
@@ -30,7 +30,7 @@ body
     - var zelda = url.split('/')[2]
     div(id='bookmark')
      div(id='title') 
-      span ##{index + 1} 
+      span(id="id") ##{index + 1} 
       a(href=link , target='_blank', title=bookmark.id)= bookmark.title
      div(id='info')
       span(id='zelda')   #{zelda}
@@ -47,7 +47,7 @@ body
  br
  #pager
   if cp !== tpages[0]
-   a(href = parseInt(cp) - 1, class='pag') #{i18n.prev}
+   a(href = parseInt(cp) - 1, class='pag') <<
   each val in tpages
    if val !== cp
     a(href= val, class='pag')
@@ -56,4 +56,4 @@ body
     a(id="heart")
      = val
   if cp !== tpages[tpages.length - 1]
-   a(href= parseInt(cp) + 1, clas='pag') #{i18n.next}
+   a(href= parseInt(cp) + 1, clas='pag') >>

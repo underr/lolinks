@@ -21,7 +21,5 @@ module.exports = {
 	clicks: 'cliques',
 	click: 'clique',
 	noclicks: 'nenhum clique',
-  sortby: 'Ordenar por:',
-	prev: 'anterior',
-	next: 'próxima'
+  sortby: 'Ordenar por:'
 };
