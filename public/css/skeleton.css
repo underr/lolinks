@@ -49,7 +49,11 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 2rem; }
 
-h3 { font-size: 3.0rem; line-height: 1.3;  letter-spacing: -.1rem; }
+h3 {
+  font-size: 3.0rem;
+  line-height: 1.3;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.24);
+  letter-spacing: -.1rem; }
 
 /* Larger than phablet */
 @media (min-width: 550px) {
@@ -89,6 +93,7 @@ input[type="button"] {
   line-height: 38px;
   padding: 0 30px;
   letter-spacing: .1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   text-transform: uppercase;
   white-space: nowrap;
   box-sizing: border-box; }
@@ -179,6 +184,10 @@ label > .label-body {
   font-weight: normal;
   margin-left: .5rem; }
 
+#input {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
 /* Spacing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 input {
@@ -211,6 +220,7 @@ hr {
   background-color: #E54E76;
   color: #fff;
   text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   opacity:0;
   -webkit-animation:fadeIn ease-in 1;
   -moz-animation:fadeIn ease-in 1;
@@ -223,7 +233,7 @@ hr {
   animation-duration:0.2s; }
 
 #pager {
-  text-align: center;}
+  text-align: center; }
 
 #dcr {
   color: #4E4E4E; }
@@ -232,6 +242,7 @@ hr {
   display: inline-block;
   background-color: #F2F2F2;
   color: #E54E76;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.24);
   margin-left: 10px;
   text-align: center;
   font-size: 11px;
@@ -250,6 +261,7 @@ label {
 #nodecor {
   text-decoration: none;
   color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.24);
   font-weight: 700; }
 
 #sortby {
@@ -263,6 +275,7 @@ label {
 #clicks {
   background-color: #DADADA;
   border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   padding: 0.2em; }
 
 #bookmark {
@@ -270,6 +283,7 @@ label {
   background-color: white;
   max-width: 23em;
   display: inline-block;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   margin: 0.2em;
   padding: 0.4em;
   border: 1px solid #CACACA;
@@ -278,6 +292,7 @@ label {
   -ms-animation: pop-in 0.5s; }
 
 a#heart {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   background-color:  #E54E76;
   border: #E54E76;
   color: white; }
@@ -291,6 +306,10 @@ a#heart {
 
 #title {
   font-weight: 700; }
+
+#id {
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.24);
+}
 
 /* Animations
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
