@@ -76,7 +76,7 @@ app.get('/p/:order/:page', function(req, res) {
       sortOrder = ' rowid DESC ';
       break;
     case 'alpha':
-      sortOrder = ' TITLE COLLATE NOCASE ';
+      sortOrder = ' title COLLATE NOCASE ';
       break;
     case 'clicks':
       sortOrder = ' clicks DESC '
