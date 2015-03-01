@@ -129,7 +129,6 @@ input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
   background-color: #82DE23;
-  border-color: #DA90A4;
   color: #FFF; }
 
 
@@ -170,8 +169,7 @@ select:focus {
   transition: all 250ms;
   transform: translateY(-1px);
   outline: 0;
-  border: 1px solid #DA90A4;
-  outline: 0; }
+  border: 1px solid #DA90A4; }
 label,
 legend {
   display: block;
@@ -319,6 +317,24 @@ a#heart {
 
 #id {
   text-shadow: 1px 1px 2px rgba(0,0,0,0.24);
+}
+
+#send {
+  width: 40px;
+  height: 40px;
+  font-size: 2.1rem;
+  text-align: center;
+  line-height: 30px; /* adjust line height to align vertically*/
+  padding: 0;
+  border-radius: 50%;
+}
+
+#send:hover {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 250ms;
+  transform: translateY(-1px);
+  outline: 0;
+  border: 1px solid #DA90A4;
 }
 
 /* Animations
