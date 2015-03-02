@@ -70,6 +70,10 @@ app.get('/p/:order/:page', function(req, res) {
   var sortOrder;
   tp[n] = req.params.page;
   title = config.TITLE || 'lolinks';
+  if (req.params.page > totalPages) {
+    res.render('error', { error: i18n.ops, back: i18n.back });
+    return;
+  }
   // order
   switch(req.params.order) {
     case 'date':
