@@ -62,19 +62,22 @@ app.get('/p/:order/:page', function(req, res) {
   db.each('SELECT count(rowid) AS cc FROM bookmarks', function(err, row) {
     totalItens = row.cc;
   });
+
   function rng(i){return i?rng(i-1).concat(i):[]}
+
   startIndex = (req.params.page - 1) * config.ITENS_PER_PAGE;
   totalPages = Math.ceil(totalItens / config.ITENS_PER_PAGE);
   tp = rng(totalPages);
   n = req.params.page - 1;
-  var sortOrder;
   tp[n] = req.params.page;
   title = config.TITLE || 'lolinks';
+
   if (req.params.page > totalPages) {
     res.render('error', { error: i18n.ops, back: i18n.back });
     return;
   }
   // order
+  var sortOrder;
   switch(req.params.order) {
     case 'date':
       sortOrder = 'rowid DESC';
