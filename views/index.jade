@@ -14,8 +14,7 @@ body
     label #{i18n.descr}
     textarea(name="dcr", id="input", placeholder=i18n.descr, cols='40', rows='30')
     br
-    input(type="submit", value=i18n.send)
-    br
+    input(type="submit", id="send", value='+')
     br
     a(id='sortby') #{i18n.sortby} 
     a(href='/p/date/1' id='nodecor') #{i18n.sort[0]} · 
