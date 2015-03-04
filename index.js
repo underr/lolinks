@@ -37,7 +37,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 
 // DATABASE CREATION
 db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='bookmarks'", function(err, row) {
-  if(err !== null) {
+  if (err !== null) {
     console.log(err);
   } else if (row == null) {
       db.run('CREATE TABLE "bookmarks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT, "clicks" INTEGER DEFAULT 0,' +
@@ -60,8 +60,14 @@ app.get('/', function(req, res) { // todo: use 1 as a "natural" / route
 app.get('/p/:order/:page', function(req, res) {
   // PAGINATION SPAGHETTI
   db.each('SELECT count(rowid) AS cc FROM bookmarks', function(err, row) {
-    totalItens = row.cc;
+    if (err !== null) {
+      console.log(err)
+      totalItens = 0;
+    } else {
+      totalItens = row.cc;
+    }
   });
+
   function rng(i){return i?rng(i-1).concat(i):[]}
   startIndex = (req.params.page - 1) * config.ITENS_PER_PAGE;
   totalPages = Math.ceil(totalItens / config.ITENS_PER_PAGE);
@@ -125,6 +131,7 @@ app.post('/add', function(req, res) {
     db.run( "INSERT INTO bookmarks (dcr, date, title, url) VALUES(?, ?, ?, ?)", dcr, date, title, url,
     function(err) {
       if (err !== null) {
+        console.log(err);
         res.render('error', {
           error: i18n.ops,
           back: i18n.back
@@ -145,7 +152,7 @@ app.get('/click/:link', function(req, res) {
   db.all("SELECT url as link FROM bookmarks WHERE id= ?", link,
   function(err, row) { // callback hell
     if (err !== null) {
-      console.log(err)
+      console.log(err);
       res.render('error', { error: i18n.ops, back: i18n.back });
     } else {
       try {
@@ -154,7 +161,7 @@ app.get('/click/:link', function(req, res) {
         res.redirect(row[0].link)
       } catch(err) {
         res.render('error');
-        console.log(err)
+        console.log(err);
       }
     }
   });
@@ -168,7 +175,8 @@ app.get('/delete/:string/:id', function(req, res) {
     db.run("DELETE FROM bookmarks  WHERE id= ? ", id,
     function(err) {
       if (err !== null) {
-              res.render('error', { error: i18n.ops, back: i18n.back });
+        console.log(err);
+        res.render('error', { error: i18n.ops, back: i18n.back });
       } else {
         var request = { deleted: id };
         res.send(JSON.stringify(request));
