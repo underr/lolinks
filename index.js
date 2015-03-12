@@ -121,7 +121,7 @@ app.post('/add', function(req, res) {
   dcr = req.body.dcr || i18n.nodcr;
   moment.locale(config.LANGUAGE);
   now = moment(new Date());
-  date = now.format("DD MMM YYYY");
+  date = now.format("YYYY-MM-DD");
 
   // this is not perfect, should be fixed
   if (!title || !url) {
