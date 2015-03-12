@@ -14,7 +14,6 @@ var chalk = require('chalk');
 var moment = require('moment');
 var fs = require('fs');
 var favicon = require('serve-favicon');
-// LOCAL
 var i18n = require('./i18n/' + config.LANGUAGE);
 
 var totalItens;
@@ -76,7 +75,6 @@ app.get('/p/:order/:page', function(req, res) {
     res.render('error', { error: i18n.ops, back: i18n.back });
     return;
   }
-  // order
   var sortOrder;
   switch(req.params.order) {
     case 'date':
@@ -126,7 +124,6 @@ app.post('/add', function(req, res) {
   } else if (toString(title).length > 25) {
     res.render('error', { error: i18n.titleLong, back: i18n.back });
   } else {
-
     knex('bookmarks').insert({ dcr: dcr, date: date, title: title, url:url})
     .then(function(row) {
         console.log(chalk.blue(url + i18n.added + '"' + title + '"'));
