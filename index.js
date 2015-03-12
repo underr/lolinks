@@ -1,20 +1,25 @@
 // INIT
 var express = require('express');
+var config = require('./config');
 var app = express();
-var sqlite3 = require('sqlite3').verbose();
+var knex = require('knex')({
+  client: 'sqlite3',
+  connection: {
+    filename: "./links.db"
+  }
+});
 // ADDONS
 var bodyParser = require('body-parser')
-var db = new sqlite3.Database('links.db');
 var chalk = require('chalk');
 var moment = require('moment');
 var fs = require('fs');
 var favicon = require('serve-favicon');
 // LOCAL
-var config = require('./config');
 var i18n = require('./i18n/' + config.LANGUAGE);
 
 var totalItens;
 var VALIDURL = /^(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
+function rng(i){return i?rng(i-1).concat(i):[]}
 
 // STRING GENERATION
 if (!config.STRING) {
@@ -35,20 +40,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/', express.static(__dirname + '/public'));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
-// DATABASE CREATION
-db.get("SELECT name FROM sqlite_master WHERE type='table' AND name='bookmarks'", function(err, row) {
-  if (err !== null) {
-    console.log(err);
-  } else if (row == null) {
-      db.run('CREATE TABLE "bookmarks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT, "clicks" INTEGER DEFAULT 0,' +
-        '"dcr" VARCHAR(50), "date" VARCHAR(20), "title" VARCHAR(25), url VARCHAR(255) UNIQUE)',
-      function(err) {
-      if (err !== null) {
-        console.log(err);
-      } else {
-        console.log(chalk.bgRed(i18n.dbCrt));
-      }
-    });
+// TABLE CHECK
+knex.schema.hasTable('bookmarks').then(function(exists) {
+  if (!exists) {
+    return knex.raw('CREATE TABLE "bookmarks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT, "clicks" INTEGER DEFAULT 0,' +
+'"dcr" VARCHAR(50), "date" VARCHAR(20), "title" VARCHAR(25), url VARCHAR(255) UNIQUE)');
   }
 });
 
@@ -59,16 +55,15 @@ app.get('/', function(req, res) { // todo: use 1 as a "natural" / route
 // PAGES
 app.get('/p/:order/:page', function(req, res) {
   // PAGINATION SPAGHETTI
-  db.each('SELECT count(rowid) AS cc FROM bookmarks', function(err, row) {
-    if (err !== null) {
-      console.log(err)
-      totalItens = 0;
-    } else {
-      totalItens = row.cc;
-    }
-  });
-
-  function rng(i){return i?rng(i-1).concat(i):[]}
+  knex.count('rowid')
+    .table('bookmarks')
+    .then(function(rows) {
+      if (rows[0]['count("rowid")'] === 0) {
+        totalItens = 1
+      } else {
+        totalItens = rows[0]['count("rowid")']
+      }
+    });
 
   startIndex = (req.params.page - 1) * config.ITENS_PER_PAGE;
   totalPages = Math.ceil(totalItens / config.ITENS_PER_PAGE);
@@ -95,13 +90,12 @@ app.get('/p/:order/:page', function(req, res) {
       break;
   }
 
-  query = 'SELECT * FROM bookmarks ORDER BY ' + sortOrder + ' LIMIT ' +
-          startIndex + ', ' + config.ITENS_PER_PAGE;
-  db.all(query, function(err, row) {
-    if (err !== null) {
-      res.render('error', { error: i18n.ops, back: i18n.back });
-      console.log(err);
-    } else {
+  knex.select()
+    .table('bookmarks')
+    .orderByRaw(sortOrder)
+    .limit(config.ITENS_PER_PAGE)
+    .offset(startIndex)
+    .then(function(row) {
       res.render('index', {
         bookmarks: row,
         tpages: tp,
@@ -109,7 +103,6 @@ app.get('/p/:order/:page', function(req, res) {
         title: title,
         i18n: i18n
       });
-    }
   });
 });
 
@@ -134,42 +127,33 @@ app.post('/add', function(req, res) {
     res.render('error', { error: i18n.titleLong, back: i18n.back });
   } else {
 
-    db.run( "INSERT INTO bookmarks (dcr, date, title, url) VALUES(?, ?, ?, ?)", dcr, date, title, url,
-    function(err) {
-      if (err !== null) {
-        console.log(err);
-        res.render('error', {
-          error: i18n.ops,
-          back: i18n.back
-        });
-      } else {
+    knex('bookmarks').insert({ dcr: dcr, date: date, title: title, url:url})
+    .then(function(row) {
         console.log(chalk.blue(url + i18n.added + '"' + title + '"'));
         res.redirect('/p/date/1');
-      }
+      })
+    .catch(function(error) {
+      console.log(error);
+      res.render('error', { error: i18n.ops, back: i18n.back });
     });
   }
 });
 
 // CLICK COUNTER
-// If you are using a older version, run the following on your shell to add the clicks column:
-// sqlite3 links.db "ALTER TABLE bookmarks ADD COLUMN "clicks" INTEGER DEFAULT 0"
 app.get('/click/:link', function(req, res) {
   link = (req.params.link);
-  db.all("SELECT url as link FROM bookmarks WHERE id= ?", link,
-  function(err, row) { // callback hell
-    if (err !== null) {
-      console.log(err);
+
+  knex('bookmarks')
+    .where('id','=',link)
+    .increment('clicks', 1)
+    .then(function(row) {
+      knex.select('url').from('bookmarks').where('id','=',link).then(function(row) {
+        res.redirect(row[0].url)
+      })
+    })
+    .catch(function(error) {
+      console.log(error);
       res.render('error', { error: i18n.ops, back: i18n.back });
-    } else {
-      try {
-        if (!link) res.render('error');
-        db.run("UPDATE bookmarks SET clicks = clicks + 1 WHERE id = ?", link)
-        res.redirect(row[0].link)
-      } catch(err) {
-        res.render('error');
-        console.log(err);
-      }
-    }
   });
 });
 
@@ -178,18 +162,17 @@ app.get('/delete/:string/:id', function(req, res) {
   str = req.params.string;
   id = req.params.id;
   if (str === config.STRING) {
-    db.run("DELETE FROM bookmarks  WHERE id= ? ", id,
-    function(err) {
-      if (err !== null) {
-        console.log(err);
-        res.render('error', { error: i18n.ops, back: i18n.back });
-      } else {
-        var request = { deleted: id };
-        res.send(JSON.stringify(request));
-      }
+    knex('bookmarks')
+    .where('id','=',id)
+    .del()
+    .then(function(row) {
+      var request = { deleted: id };
+      res.send(JSON.stringify(request));
+    })
+    .catch(function(error) {
+      console.log(error)
+      res.render('error', { error: i18n.ops, back: i18n.back });
     });
-  } else {
-     res.render('error', { error: i18n.notAuth });
   }
 });
 
