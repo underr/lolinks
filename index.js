@@ -110,7 +110,6 @@ app.post('/add', function(req, res) {
   title = req.body.title;
   url = req.body.url;
   dcr = req.body.dcr || i18n.nodcr;
-  moment.locale(config.LANGUAGE);
   now = moment(new Date());
   date = now.format("YYYY-MM-DD");
 
