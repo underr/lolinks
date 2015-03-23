@@ -42,8 +42,14 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 // TABLE CHECK
 knex.schema.hasTable('bookmarks').then(function(exists) {
   if (!exists) {
-    return knex.raw('CREATE TABLE "bookmarks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT, "clicks" INTEGER DEFAULT 0,' +
-'"dcr" VARCHAR(50), "date" VARCHAR(20), "title" VARCHAR(25), url VARCHAR(255) UNIQUE)');
+    return knex.schema.createTable('bookmarks', function(t) {
+      t.increments('id').primary();
+      t.integer('clicks').defaultTo(0);
+      t.string('dcr', 50);
+      t.string('date', 20);
+      t.string('title', 25);
+      t.string('url', 255).unique();
+    });
   }
 });
 
