@@ -4,6 +4,7 @@ var chalk = require('chalk');
 var i18n = require('../i18n/' + config.LANGUAGE);
 var router = express.Router();
 var knex = require('knex')({
+  debug: true,
   client: 'sqlite3',
   connection: {
       filename: "./links.db"
@@ -13,12 +14,13 @@ var knex = require('knex')({
 var totalItens; // to fix
 function rng(i){return i?rng(i-1).concat(i):[]}
 
-router.get('/', function(req, res) { // todo: use 1 as a "natural" / route
-  res.redirect('/p/date/1'); // by date is the default order
-});
-
 // PAGES
-router.get('/p/:order/:page', function(req, res) {
+router.get('/', function(req, res) {
+  if (!req.query.page && !req.query.order) {
+    res.redirect('/?page=1&order=date');
+  } else if (!req.query.order) {
+	res.redirect('/?page=1&order=date');
+  }
   // PAGINATION SPAGHETTI
   knex.count('rowid')
     .table('bookmarks')
@@ -30,19 +32,19 @@ router.get('/p/:order/:page', function(req, res) {
       }
     });
 
-  startIndex = (req.params.page - 1) * config.ITENS_PER_PAGE;
+  startIndex = (req.query.page - 1) * config.ITENS_PER_PAGE;
   totalPages = Math.ceil(totalItens / config.ITENS_PER_PAGE);
   tp = rng(totalPages);
-  n = req.params.page - 1;
-  tp[n] = req.params.page;
+  n = req.query.page - 1;
+  tp[n] = req.query.page;
   title = config.TITLE || 'lolinks';
 
-  if (req.params.page > totalPages) {
+  if (req.query.page > totalPages) {
     res.render('error', { error: i18n.ops, back: i18n.back });
     return;
   }
   var sortOrder;
-  switch(req.params.order) {
+  switch(req.query.order) {
     case 'date':
       sortOrder = 'rowid DESC';
       break;
@@ -63,7 +65,8 @@ router.get('/p/:order/:page', function(req, res) {
       res.render('index', {
         bookmarks: row,
         tpages: tp,
-        cp: req.params.page,
+        order: req.query.order,
+        cp: req.query.page,
         title: title,
         i18n: i18n
       });

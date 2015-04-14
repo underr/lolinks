@@ -17,9 +17,9 @@ body
     input(type="submit", id="send", value='+')
     br
     a(id='sortby') #{i18n.sortby} 
-    a(href='/p/date/1' id='nodecor') #{i18n.sort[0]} · 
-    a(href='/p/alpha/1' id='nodecor') #{i18n.sort[1]} · 
-    a(href='/p/clicks/1' id ='nodecor') #{i18n.sort[2]}
+    a(href='/?page=1&order=date' id='nodecor') #{i18n.sort[0]} · 
+    a(href='/?page=1&order=alpha' id='nodecor') #{i18n.sort[1]} · 
+    a(href='/?page=1&order=clicks' id ='nodecor') #{i18n.sort[2]}
   br
   .container.one-half.column 
    each bookmark, index in bookmarks
@@ -46,13 +46,16 @@ body
  br
  #pager
   if cp !== tpages[0]
-   a(href = parseInt(cp) - 1, class='pag') ≪
+   - var prevlink = '/?page=' + (parseInt(cp) - 1) + '&order=' + order
+   a(href= prevlink, class='pag') ≪
   each val in tpages
    if val !== cp
-    a(href= val, id='page')
+    - paglink = '/?page=' + val + '&order=' + order
+    a(href= paglink, id='page')
      = val
    else
     a(id="heart")
      = val
   if cp !== tpages[tpages.length - 1]
-   a(href= parseInt(cp) + 1, clas='pag') ≫
+   - var nextlink = '/?page=' + (parseInt(cp) + 1) + '&order=' + order
+   a(href= nextlink) ≫
