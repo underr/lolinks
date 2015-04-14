@@ -4,7 +4,6 @@ var chalk = require('chalk');
 var i18n = require('../i18n/' + config.LANGUAGE);
 var router = express.Router();
 var knex = require('knex')({
-  debug: true,
   client: 'sqlite3',
   connection: {
       filename: "./links.db"
