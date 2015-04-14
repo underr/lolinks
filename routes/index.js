@@ -13,6 +13,11 @@ var knex = require('knex')({
 var totalItens; // to fix
 function rng(i){return i?rng(i-1).concat(i):[]}
 
+// LEGACY ROUTE
+router.get('/p/date/1/', function(req, res) {
+  res.redirect('/?page=1&order=date');
+});
+
 // PAGES
 router.get('/', function(req, res) {
   if (!req.query.page && !req.query.order) {
