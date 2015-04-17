@@ -34,7 +34,7 @@ router.post('/', function(req, res) {
     knex('bookmarks').insert({ dcr: dcr, date: date, title: title, url:url})
     .then(function(row) {
         console.log(chalk.blue(url + i18n.added + '"' + title + '"'));
-        res.redirect('/?page=1&order=clicks');
+        res.redirect('/?page=1&order=date');
       })
     .catch(function(error) {
       console.log(error);
