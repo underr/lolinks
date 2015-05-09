@@ -12,8 +12,8 @@ var knex = require('knex')({
 
 // DELETE WITH STRING
 router.get('/:string/:id', function(req, res) {
-  str = req.params.string;
-  id = req.params.id;
+  var str = req.params.string;
+  var id = req.params.id;
   if (str === config.STRING) {
     knex('bookmarks')
     .where('id','=',id)

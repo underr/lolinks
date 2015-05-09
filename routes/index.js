@@ -36,12 +36,12 @@ router.get('/', function(req, res) {
       }
     });
 
-  startIndex = (req.query.page - 1) * config.ITENS_PER_PAGE;
-  totalPages = Math.ceil(totalItens / config.ITENS_PER_PAGE);
-  tp = rng(totalPages);
-  n = req.query.page - 1;
+  var startIndex = (req.query.page - 1) * config.ITENS_PER_PAGE;
+  var totalPages = Math.ceil(totalItens / config.ITENS_PER_PAGE);
+  var tp = rng(totalPages);
+  var n = req.query.page - 1;
   tp[n] = req.query.page;
-  title = config.TITLE || 'lolinks';
+  var title = config.TITLE || 'lolinks';
 
   if (req.query.page > totalPages) {
     res.render('error', { error: i18n.ops, back: i18n.back });
