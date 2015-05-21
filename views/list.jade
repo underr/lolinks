@@ -16,10 +16,14 @@ body
     br
     input(type="submit", id="send", value='+')
     br
+    a(id='sortby') View: 
+    a(href='/?page=1&order=date&view=list' id='nodecor') List · 
+    a(href='/?page=1&order=date' id='nodecor') Blocks
+    br
     a(id='sortby') #{i18n.sortby} 
-    a(href='/?page=1&order=date' id='nodecor') #{i18n.sort[0]} · 
-    a(href='/?page=1&order=alpha' id='nodecor') #{i18n.sort[1]} · 
-    a(href='/?page=1&order=clicks' id ='nodecor') #{i18n.sort[2]}
+    a(href='/?page=1&order=date&view=list' id='nodecor') #{i18n.sort[0]} · 
+    a(href='/?page=1&order=alpha&view=list' id='nodecor') #{i18n.sort[1]} · 
+    a(href='/?page=1&order=clicks&view=list' id ='nodecor') #{i18n.sort[2]}
   br
   center
    if bookmarks.length >= 1
@@ -57,16 +61,16 @@ body
  #pager
   if bookmarks.length >= 1
     if cp !== tpages[0]
-     - var prevlink = '/?page=' + (parseInt(cp) - 1) + '&order=' + order
+     - var prevlink = '/?page=' + (parseInt(cp) - 1) + '&order=' + order + '&view=list'
      a(href= prevlink, class='pag') ≪
     each val in tpages
      if val !== cp
-      - paglink = '/?page=' + val + '&order=' + order
+      - paglink = '/?page=' + val + '&order=' + order + '&view=list'
       a(href= paglink, id='page')
        = val
      else
       a(id="heart")
        = val
     if cp !== tpages[tpages.length - 1]
-     - var nextlink = '/?page=' + (parseInt(cp) + 1) + '&order=' + order
+     - var nextlink = '/?page=' + (parseInt(cp) + 1) + '&order=' + order + '&view=list'
      a(href= nextlink) ≫

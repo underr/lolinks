@@ -16,6 +16,10 @@ body
     br
     input(type="submit", id="send", value='+')
     br
+    a(id='sortby') View: 
+    a(href='/?page=1&order=date&view=list' id='nodecor') List · 
+    a(href='/?page=1&order=date' id='nodecor') Blocks
+    br
     a(id='sortby') #{i18n.sortby} 
     a(href='/?page=1&order=date' id='nodecor') #{i18n.sort[0]} · 
     a(href='/?page=1&order=alpha' id='nodecor') #{i18n.sort[1]} · 

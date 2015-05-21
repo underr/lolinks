@@ -20,7 +20,7 @@ router.get('/p/date/1/', function(req, res) {
 
 // PAGES
 router.get('/', function(req, res) {
-  var view = (req.query.view == 'list') ? 'list' : 'list';
+  var view = (req.query.view == 'list') ? 'list' : 'index';
   if (!req.query.page && !req.query.order) {
     res.redirect('/?page=1&order=date');
   } else if (!req.query.order) {
