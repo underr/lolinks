@@ -56,7 +56,7 @@ app.use('/delete', require('./routes/delete'));
 
 app.use(function(err, req, res, next) {
   console.error(err.stack);
-  res.status(500).render('error');
+  res.render('error').status(500);
 });
 
 app.use(function(req, res, next){
