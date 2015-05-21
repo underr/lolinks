@@ -5,7 +5,7 @@ var i18n = require('../i18n/' + config.LANGUAGE);
 var router = express.Router();
 var knex = require('knex')({
   client: 'sqlite3',
-  debug: true,
+  debug: config.DEBUG,
   connection: {
       filename: "./links.db"
     }
@@ -60,6 +60,9 @@ router.get('/', function(req, res) {
       break;
     case 'clicks':
       sortOrder = 'clicks DESC'
+      break;
+    default:
+      sortOrder = 'rowid DESC';
       break;
   }
 
