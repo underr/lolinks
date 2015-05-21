@@ -5,6 +5,7 @@ var i18n = require('../i18n/' + config.LANGUAGE);
 var router = express.Router();
 var knex = require('knex')({
   client: 'sqlite3',
+  debug: true,
   connection: {
       filename: "./links.db"
     }
@@ -15,19 +16,19 @@ function rng(i){return i?rng(i-1).concat(i):[]}
 
 // LEGACY ROUTE
 router.get('/p/date/1/', function(req, res) {
-  res.redirect('/?page=1&order=date');
+  res.redirect('/?page=1&order=date&view=' + config.DEFAULT_VIEW);
 });
 
 // PAGES
 router.get('/', function(req, res) {
   var view = (req.query.view == 'list') ? 'list' : 'index';
   if (!req.query.page && !req.query.order) {
-    res.redirect('/?page=1&order=date');
+    res.redirect('/?page=1&order=date&view=' + config.DEFAULT_VIEW);
   } else if (!req.query.order) {
-	res.redirect('/?page=1&order=date');
+	res.redirect('/?page=1&order=date&view=' + config.DEFAULT_VIEW);
   }
   // PAGINATION SPAGHETTI
-  knex.count('rowid')
+  knex.count('id')
     .table('bookmarks')
     .then(function(rows) {
       if (rows[0]['count("rowid")'] === 0) {
@@ -36,6 +37,7 @@ router.get('/', function(req, res) {
         totalItens = rows[0]['count("rowid")']
       }
     });
+
   var startIndex = (req.query.page - 1) * config.ITENS_PER_PAGE;
   var totalPages = Math.ceil(totalItens / config.ITENS_PER_PAGE);
   var tp = rng(totalPages);
