@@ -24,5 +24,8 @@ module.exports = {
   sortby: 'Sort by:',
   nolinks: 'No links added. Send one!',
   colTitle: 'Title',
-  colDate: 'Date'
+  colDate: 'Date',
+  viewCat: 'View:',
+  listView: 'List',
+  blocksView: 'Blocks'
 };
