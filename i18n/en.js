@@ -27,5 +27,6 @@ module.exports = {
   colDate: 'Date',
   viewCat: 'View:',
   listView: 'List',
-  blocksView: 'Blocks'
+  blocksView: 'Blocks',
+  alreadySent: 'This link was already sent.'
 };
