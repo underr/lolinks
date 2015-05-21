@@ -187,8 +187,7 @@ label > .label-body {
 /* Spacing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 input {
-  margin-bottom: 1em;
-}
+  margin-bottom: 1em; }
 
 /* Tables
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -205,16 +204,14 @@ td:last-child {
   padding-right: 0; }
 
 tr:hover, tr:focus {
-  background-color: #E1DFDF;
-}
+  background-color: #E1DFDF; }
 
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 hr {
   margin-top: 0.3rem;
   border-style: none;
-  border-top: 1px solid #E1E1E1;
-}
+  border-top: 1px solid #E1E1E1; }
 
 /* Clearing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -283,8 +280,7 @@ label {
   color: white; }
 
 #nodecor:hover {
-  font-weight: 500;
-}
+  font-weight: 500; }
 
 #clicks {
   background-color: #DADADA;
@@ -312,8 +308,8 @@ label {
   -ms-animation: pop-in 0.5s;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   margin: 0.4em;
-  padding: 0.4em;
-}
+  padding: 0.4em; }
+
 a#heart {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   background-color:  #E54E76;
@@ -331,8 +327,7 @@ a#heart {
   font-weight: 700; }
 
 #id {
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.24);
-}
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.24); }
 
 #send {
   width: 40px;
@@ -341,16 +336,14 @@ a#heart {
   text-align: center;
   line-height: 30px; /* adjust line height to align vertically*/
   padding: 0;
-  border-radius: 50%;
-}
+  border-radius: 50%; }
 
 #send:hover {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 250ms;
   transform: translateY(-1px);
   outline: 0;
-  border: 1px solid #DA90A4;
-}
+  border: 1px solid #DA90A4; }
 
 /* Animations
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
