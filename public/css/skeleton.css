@@ -204,6 +204,9 @@ th:last-child,
 td:last-child {
   padding-right: 0; }
 
+tr:hover, tr:focus {
+  background-color: #E1DFDF;
+}
 
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
