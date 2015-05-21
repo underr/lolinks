@@ -21,5 +21,8 @@ module.exports = {
 	clicks: 'cliques',
 	click: 'clique',
 	noclicks: 'nenhum clique',
-  sortby: 'Ordenar por:'
+  sortby: 'Ordenar por:',
+  nolinks: 'Nenhum link adicionado. Envie um!',
+  colTitle: 'Título',
+  colDate: 'Data'
 };

@@ -21,5 +21,8 @@ module.exports = {
 	clicks: 'clicks',
 	click: 'click',
 	noclicks: 'no clicks',
-  sortby: 'Sort by:'
+  sortby: 'Sort by:',
+  nolinks: 'No links added. Send one!',
+  colTitle: 'Title',
+  colDate: 'Date'
 };
