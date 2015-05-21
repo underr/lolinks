@@ -20,6 +20,7 @@ router.get('/p/date/1/', function(req, res) {
 
 // PAGES
 router.get('/', function(req, res) {
+  var view = (req.query.view == 'list') ? 'list' : 'list';
   if (!req.query.page && !req.query.order) {
     res.redirect('/?page=1&order=date');
   } else if (!req.query.order) {
@@ -35,7 +36,6 @@ router.get('/', function(req, res) {
         totalItens = rows[0]['count("rowid")']
       }
     });
-
   var startIndex = (req.query.page - 1) * config.ITENS_PER_PAGE;
   var totalPages = Math.ceil(totalItens / config.ITENS_PER_PAGE);
   var tp = rng(totalPages);
@@ -47,6 +47,7 @@ router.get('/', function(req, res) {
     res.render('error', { error: i18n.ops, back: i18n.back });
     return;
   }
+
   var sortOrder;
   switch(req.query.order) {
     case 'date':
@@ -66,7 +67,7 @@ router.get('/', function(req, res) {
     .limit(config.ITENS_PER_PAGE)
     .offset(startIndex)
     .then(function(row) {
-      res.render('index', {
+      res.render(view, {
         bookmarks: row,
         tpages: tp,
         order: req.query.order,

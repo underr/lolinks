@@ -1,0 +1,72 @@
+include header
+
+body
+ .container
+  #add
+   h3 #{title}
+
+   form(action="/add", method="post")
+    label #{i18n.name}
+    input(type="text", id="input", name="title", placeholder=i18n.name, size="20", autofocus="autofocus")
+    label URL
+    input(type="text", id="input", name="url", placeholder="URL (http://)", size="34")
+    br
+    label #{i18n.descr}
+    textarea(name="dcr", id="input", placeholder=i18n.descr, cols='40', rows='30')
+    br
+    input(type="submit", id="send", value='+')
+    br
+    a(id='sortby') #{i18n.sortby} 
+    a(href='/?page=1&order=date' id='nodecor') #{i18n.sort[0]} · 
+    a(href='/?page=1&order=alpha' id='nodecor') #{i18n.sort[1]} · 
+    a(href='/?page=1&order=clicks' id ='nodecor') #{i18n.sort[2]}
+  br
+  center
+   if bookmarks.length >= 1
+    table.u-full-width
+       thead
+        tr
+         th #
+         th #{i18n.colTitle}
+         th Desc
+         th Site
+         th #{i18n.colDate}
+         th Clicks
+       each bookmark, index in bookmarks
+        - var link = '/click/' + bookmark.id;
+        - var clac = bookmark.clicks;
+        - var url = bookmark.url;
+        - var zelda = url.split('/')[2]
+         tbody
+           tr
+            td <b>#{index + 1}</b>
+            td 
+             a(href= link) #{bookmark.title}
+            td #{bookmark.dcr}
+            td <i>#{zelda}</i>
+            td #{bookmark.date}
+            if clac > 1
+             td #{clac} #{i18n.clicks}
+            else if clac === 1
+             td 1 #{i18n.click}
+            else
+             td #{i18n.noclicks}
+   else
+    h2 #{i18n.nolinks}
+ br
+ #pager
+  if bookmarks.length >= 1
+    if cp !== tpages[0]
+     - var prevlink = '/?page=' + (parseInt(cp) - 1) + '&order=' + order
+     a(href= prevlink, class='pag') ≪
+    each val in tpages
+     if val !== cp
+      - paglink = '/?page=' + val + '&order=' + order
+      a(href= paglink, id='page')
+       = val
+     else
+      a(id="heart")
+       = val
+    if cp !== tpages[tpages.length - 1]
+     - var nextlink = '/?page=' + (parseInt(cp) + 1) + '&order=' + order
+     a(href= nextlink) ≫
