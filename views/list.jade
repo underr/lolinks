@@ -35,10 +35,9 @@ body
          th Desc
          th Site
          th #{i18n.colDate}
-         th Clicks
+         th #{i18n.colClicks}
        each bookmark, index in bookmarks
         - var link = '/click/' + bookmark.id;
-        - var clac = bookmark.clicks;
         - var url = bookmark.url;
         - var zelda = url.split('/')[2]
          tbody
@@ -49,12 +48,7 @@ body
             td #{bookmark.dcr}
             td <i>#{zelda}</i>
             td #{bookmark.date}
-            if clac > 1
-             td #{clac} #{i18n.clicks}
-            else if clac === 1
-             td 1 #{i18n.click}
-            else
-             td #{i18n.noclicks}
+            td #{bookmark.clicks}
    else
     h2 #{i18n.nolinks}
  br

@@ -28,5 +28,6 @@ module.exports = {
   viewCat: 'View:',
   listView: 'List',
   blocksView: 'Blocks',
-  alreadySent: 'This link was already sent.'
+  alreadySent: 'This link was already sent.',
+  colClicks: 'Clicks'
 };
